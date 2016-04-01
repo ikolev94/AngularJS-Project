@@ -1,8 +1,9 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "AngularJSProject",
+  "description": "AngularJS project",
   "version": "0.0.1",
   "license": "MIT",
+  "author": "Ivan Kolev",
   "dependencies": {
     "angular": "~1.4.0",
     "angular-route": "~1.4.0",
