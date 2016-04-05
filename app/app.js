@@ -3,8 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('issueTrackerSystem', [
         'ngRoute',
+        'angular-loading-bar',
         'myApp.view1',
-        'myApp.view2',
         'login'
     ])
     .constant('BAAS', {

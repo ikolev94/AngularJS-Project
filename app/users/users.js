@@ -4,12 +4,12 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'users/login.html',
-            controller: 'loginCtrl'
+            templateUrl: 'users/users.html',
+            controller: 'UserCtrl'
         });
     }])
 
-    .controller('loginCtrl', ['$scope', 'authentication', function ($scope, authentication) {
+    .controller('UserCtrl', ['$scope', 'authentication', function ($scope, authentication) {
         $scope.login = function (user) {
             authentication.login(user);
         };
