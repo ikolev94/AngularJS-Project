@@ -13,11 +13,11 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
         function validateLoginUser(user) {
             if (!user.username) {
-                console.log('Invalid username');
+                notie.alert(3, 'Invalid username', 1.5);
                 return false;
             }
             if (!user.password) {
-                console.log('Invalid password');
+                notie.alert(3, 'Invalid password', 1.5);
                 return false;
             }
             return true;
@@ -25,23 +25,23 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
         function validateRegisterUser(user) {
             if (typeof user.username !== 'string') {
-                console.log('Invalid username');
+                notie.alert(3, 'Invalid username', 1.5);
                 return false;
             }
             if (typeof user.password !== 'string') {
-                console.log('Invalid password');
+                notie.alert(3, 'Invalid password', 1.5);
                 return false;
             }
             if (typeof user.confirmPassword !== 'string' || user.password !== user.confirmPassword) {
-                console.log('Invalid confirm password');
+                notie.alert(3, 'Invalid confirm password', 1.5);
                 return false;
             }
             if (typeof user.name !== 'string') {
-                console.log('Invalid name');
+                notie.alert(3, 'Invalid name', 1.5);
                 return false;
             }
             if (typeof user.email !== 'string') {
-                console.log('Invalid name');
+                notie.alert(3, 'Invalid email', 1.5);
                 return false;
             }
             return true;
@@ -51,12 +51,24 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
         $scope.login = function (user) {
             if (validateLoginUser(user)) {
-                authentication.login(user);
+                authentication.login(user)
+                    .then(function (userData) {
+                        notie.alert(1, 'Welcome ' + userData.userName, 1.5);
+                        sessionStorage['access_token'] = userData.access_token;
+                    }, function (error) {
+                        notie.alert(3, error, 2);
+                    })
             }
         };
         $scope.register = function (user) {
             if (validateRegisterUser(user)) {
-                authentication.register(user);
+                authentication.register(user)
+                    .then(function (userData) {
+                        notie.alert(1, 'Welcome ' + userData.userName, 1.5);
+                        sessionStorage['access_token'] = userData.access_token;
+                    }, function (error) {
+                        notie.alert(3, error, 2);
+                    })
             }
         }
     }]);

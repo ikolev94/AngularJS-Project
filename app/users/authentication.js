@@ -1,18 +1,28 @@
 angular.module('issueTrackerSystem.users.authentication', [])
-    .factory('authentication', ['$http', 'BAAS', function ($http, BAAS) {
+    .factory('authentication', ['$http', '$q', 'BASE_URL', function ($http, $q, BASE_URL) {
+
+        var usersUrl = BASE_URL + 'users/';
 
         function register(user) {
-            $http.post(BAAS.USERS_URL, user, {headers: BAAS.HEADERS})
-                .success(function (respond) {
-                    console.log(respond);
-                })
+            var defer = $q.defer();
+            $http.post(usersUrl + 'register', user)
+                .then(function (respond) {
+                    defer.resolve(respond.data);
+                }, function (error) {
+                    defer.reject(error.data.message)
+                });
+            return defer.promise;
         }
 
         function login(user) {
-            $http.post(BAAS.USERS_URL+'login', user, {headers: BAAS.HEADERS})
-                .success(function (respond) {
-                    console.log(respond);
-                })
+            var defer = $q.defer();
+            $http.post(usersUrl + 'login', user)
+                .then(function (success) {
+                    defer.resolve(success.data);
+                }, function (error) {
+                    defer.reject(error.data.error_description);
+                });
+            return defer.promise;
         }
 
         return {

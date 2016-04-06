@@ -7,15 +7,7 @@ angular.module('issueTrackerSystem', [
         'myApp.view1',
         'login'
     ])
-    .constant('BAAS', {
-        "BASE_URL": 'https://baas.kinvey.com/',
-        "USERS_URL": 'https://baas.kinvey.com/user/kid_-yxycYqukW/',
-        "APP_KEY": 'kid_-yxycYqukW',
-        "HEADERS": {
-            'Authorization': 'Basic a2lkXy15eHljWXF1a1c6YTQ2ZDViZWZmMzVhNDQyOGJkMDU5ZjJhNGIwMDdjMTQ=',
-            'Content-Type': 'application/json'
-        }
-    })
+    .constant("BASE_URL", 'http://softuni-social-network.azurewebsites.net/api/')
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
