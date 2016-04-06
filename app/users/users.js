@@ -13,11 +13,12 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
         function validateLoginUser(user) {
             if (!user.username) {
-                notie.alert(3, 'Invalid username', 1.5);
+                // notie.alert(3, 'Invalid username', 1.5);
+                notification.error('Invalid username');
                 return false;
             }
             if (!user.password) {
-                notie.alert(3, 'Invalid password', 1.5);
+                notification.error('Invalid password');
                 return false;
             }
             return true;
@@ -25,23 +26,23 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
         function validateRegisterUser(user) {
             if (typeof user.username !== 'string') {
-                notie.alert(3, 'Invalid username', 1.5);
+                notification.error('Invalid username');
                 return false;
             }
             if (typeof user.password !== 'string') {
-                notie.alert(3, 'Invalid password', 1.5);
+                notification.error('Invalid password');
                 return false;
             }
             if (typeof user.confirmPassword !== 'string' || user.password !== user.confirmPassword) {
-                notie.alert(3, 'Invalid confirm password', 1.5);
+                notification.error('Invalid confirm password');
                 return false;
             }
             if (typeof user.name !== 'string') {
-                notie.alert(3, 'Invalid name', 1.5);
+                notification.error('Invalid name');
                 return false;
             }
             if (typeof user.email !== 'string') {
-                notie.alert(3, 'Invalid email', 1.5);
+                notification.error('Invalid email');
                 return false;
             }
             return true;
@@ -53,10 +54,10 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
             if (validateLoginUser(user)) {
                 authentication.login(user)
                     .then(function (userData) {
-                        notie.alert(1, 'Welcome ' + userData.userName, 1.5);
+                        notification.success('Welcome ' + userData.userName);
                         sessionStorage['access_token'] = userData.access_token;
-                    }, function (error) {
-                        notie.alert(3, error, 2);
+                    }, function (errorMsg) {
+                        notification.error(errorMsg);
                     })
             }
         };
@@ -64,10 +65,10 @@ angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
             if (validateRegisterUser(user)) {
                 authentication.register(user)
                     .then(function (userData) {
-                        notie.alert(1, 'Welcome ' + userData.userName, 1.5);
+                        notification.success('Welcome ' + userData.userName);
                         sessionStorage['access_token'] = userData.access_token;
-                    }, function (error) {
-                        notie.alert(3, error, 2);
+                    }, function (errorMsg) {
+                        notification.error(errorMsg);
                     })
             }
         }
