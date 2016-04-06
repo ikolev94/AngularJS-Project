@@ -3,6 +3,9 @@ angular.module('issueTrackerSystem.users.authentication', [])
 
         function register(user) {
             $http.post(BAAS.USERS_URL, user, {headers: BAAS.HEADERS})
+                .success(function (respond) {
+                    console.log(respond);
+                })
         }
 
         function login(user) {
