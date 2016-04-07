@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('login', ['ngRoute', 'issueTrackerSystem.users.authentication'])
+angular.module('users', ['ngRoute', 'issueTrackerSystem.users.authentication'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
