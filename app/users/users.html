@@ -8,61 +8,61 @@
     </div>
 
     <div class="row flex">
-        <div class="col-lg-5">
+        <div class="col-xs-12 col-sm-6 col-lg-5">
             <div class="well bs-component">
                 <form name="registerForm" class="form-horizontal">
                     <fieldset>
                         <legend>Register</legend>
                         <div class="form-group">
-                            <label for="reg-username" class="col-lg-2 control-label">*Username</label>
-                            <div class="col-lg-10">
+                            <label for="reg-username" class="control-label">*Username</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="text" required="required" ng-model="registerUser.username"
                                        class="form-control" id="reg-username" placeholder="Username">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">*Password</label>
-                            <div class="col-lg-10">
+                            <label for="inputPassword" class="control-label">*Password</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="password" required="required" ng-minlength="6" ng-maxlength="100"
                                        ng-model="registerUser.password" class="form-control" id="inputPassword"
                                        placeholder="Password">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="conf-password" class="col-lg-2 control-label">*Confirm Password</label>
-                            <div class="col-lg-10">
+                            <label for="conf-password" class="control-label">*Confirm Password</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="password" required="required" ng-minlength="6" ng-maxlength="100"
                                        ng-model="registerUser.confirmPassword" class="form-control" id="conf-password"
                                        placeholder="Confirm Password">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="reg-name" class="col-lg-2 control-label">*Name</label>
-                            <div class="col-lg-10">
+                            <label for="reg-name" class="control-label">*Name</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="text" required="required" ng-model="registerUser.name" class="form-control"
                                        id="reg-name" placeholder="Name">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="reg-email" class="col-lg-2 control-label">*Email</label>
-                            <div class="col-lg-10">
+                            <label for="reg-email" class="control-label">*Email</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="email" required="required" ng-model="registerUser.email"
                                        class="form-control" id="reg-email" placeholder="Email">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="reg-gender" class="col-lg-2 control-label">Gender</label>
-                            <div class="col-lg-10">
+                            <label for="reg-gender" class="control-label">Gender</label>
+                            <!--<div class="col-lg-10">-->
                                 <select ng-model="registerUser.gender" class="form-control" id="reg-gender">
                                     <option value="0" selected>Other</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                 </select>
                                 <br>
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-offset-5 col-xs-offset-5">
                                 <button type="submit" ng-click="register(registerUser)"
                                         ng-disabled="registerForm.$invalid"
                                         class="btn btn-primary">Register
@@ -71,32 +71,32 @@
                         </div>
                     </fieldset>
                 </form>
-                <div id="source-button" class="btn btn-primary btn-xs" style="display: block;">&lt; &gt;</div>
+                <!--<div id="source-button" class="btn btn-primary btn-xs" style="display: block;">&lt; &gt;</div>-->
             </div>
         </div>
-        <div class="col-lg-5 col-lg-offset-1">
+        <div class="col-xs-12 col-sm-6 col-lg-5 col-lg-offset-1">
             <div class="well bs-component">
                 <form name="loginForm" class="form-horizontal">
                     <fieldset>
                         <legend>Login</legend>
                         <div class="form-group">
-                            <label for="log-username" class="col-lg-2 control-label">Username</label>
-                            <div class="col-lg-10">
+                            <label for="log-username" class="control-label">Username</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="text" required="required" class="form-control"
                                        ng-model="loginUser.username"
                                        id="log-username" placeholder="Username">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label for="log-password" class="col-lg-2 control-label">Password</label>
-                            <div class="col-lg-10">
+                            <label for="log-password" class="control-label">Password</label>
+                            <!--<div class="col-lg-10">-->
                                 <input type="password" required="required" ng-minlength="6" ng-maxlength="100"
                                        class="form-control" ng-model="loginUser.password" id="log-password"
                                        placeholder="Password">
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-offset-5 col-xs-offset-5">
                                 <button type="submit" ng-disabled="loginForm.$invalid" ng-click="login(loginUser)"
                                         class="btn btn-primary">Login
                                 </button>
@@ -104,7 +104,7 @@
                         </div>
                     </fieldset>
                 </form>
-                <div id="asource-button" class="btn btn-primary btn-xs" style="display: block;">&lt; &gt;</div>
+                <!--<div id="asource-button" class="btn btn-primary btn-xs" style="display: block;">&lt; &gt;</div>-->
             </div>
         </div>
     </div>
