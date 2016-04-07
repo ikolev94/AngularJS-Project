@@ -4,9 +4,11 @@
 angular.module('issueTrackerSystem', [
         'ngRoute',
         'angular-loading-bar',
-        'users'
+        'issueTrackerSystem.notification',
+        'issueTrackerSystem.users',
+        'issueTrackerSystem.dashboard'
     ])
     .constant("BASE_URL", 'http://softuni-social-network.azurewebsites.net/api/')
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider.otherwise({redirectTo: '/dashboard'});
     }]);
