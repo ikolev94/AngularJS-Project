@@ -6,6 +6,7 @@ angular.module('issueTrackerSystem', [
         'angular-loading-bar',
         'issueTrackerSystem.notification',
         'issueTrackerSystem.users',
+        'issueTrackerSystem.users.profile',
         'issueTrackerSystem.dashboard'
     ])
     .constant("BASE_URL", 'http://softuni-social-network.azurewebsites.net/api/')
