@@ -22,7 +22,7 @@ angular.module('issueTrackerSystem.users.authentication', [])
                 .then(function (success) {
                     defer.resolve(success.data);
                 }, function (error) {
-                    defer.reject(error.data.error_description);
+                    defer.reject(error.data.error_description || error.data.message);
                 });
             return defer.promise;
         }

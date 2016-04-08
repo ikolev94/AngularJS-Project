@@ -1,10 +1,10 @@
 <div class="well container">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
-        <li><a href="#profile/password" data-toggle="tab">Password</a></li>
+        <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Profile</a></li>
+        <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Password</a></li>
     </ul>
     <div class="">
-        <div class="tab-pane active in">
+        <div class="tab-pane active in" ng-show="isSet(1)" id="home">
             <form name="editProfileForm">
                 <label for="edit-name">Name</label>
                 <input type="text" required="required" id="edit-name" ng-model="user.name" class="form-control">
@@ -32,12 +32,19 @@
                 </div>
             </form>
         </div>
-        <div class="tab-pane fade" id="profile">
-            <form id="tab2">
-                <label>New Password</label>
-                <input type="password" class="input-xlarge">
+        <div class="tab-pane active in" ng-show="isSet(2)" id="profile">
+            <form>
+                <label for="old-pas">Old password</label>
+                <input id="old-pas" ng-model="passwordData.oldPassword" type="password" required="required"
+                       class="form-control">
+                <label for="new-pas">New password</label>
+                <input id="new-pas" ng-model="passwordData.newPassword" type="password" required="required"
+                       class="form-control">
+                <label for="conf-pas">Confirm new password</label>
+                <input id="conf-pas" ng-model="passwordData.confNewPassword" type="password" required="required"
+                       class="form-control">
                 <div>
-                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-primary" ng-click="changePassword(passwordData)">Update</button>
                 </div>
             </form>
         </div>

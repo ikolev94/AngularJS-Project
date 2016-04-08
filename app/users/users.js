@@ -59,7 +59,7 @@ angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentica
                         return false;
                     }
                     if (typeof user.confirmPassword !== 'string' || user.password !== user.confirmPassword) {
-                        notification.error('Invalid confirm password');
+                        notification.error('Passwords do not match.');
                         return false;
                     }
                     if (typeof user.name !== 'string') {

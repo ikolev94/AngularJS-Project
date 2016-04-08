@@ -17,19 +17,7 @@ angular.module('issueTrackerSystem.users.profile', ['issueTrackerSystem.users.id
             '$location',
             function ($scope, notification, identity, $location) {
 
-                function validateRegisterUser(user) {
-                    if (typeof user.username !== 'string') {
-                        notification.error('Invalid username');
-                        return false;
-                    }
-                    if (typeof user.password !== 'string') {
-                        notification.error('Invalid password');
-                        return false;
-                    }
-                    if (typeof user.confirmPassword !== 'string' || user.password !== user.confirmPassword) {
-                        notification.error('Invalid confirm password');
-                        return false;
-                    }
+                function validateUserData(user) {
                     if (typeof user.name !== 'string') {
                         notification.error('Invalid name');
                         return false;
@@ -41,13 +29,46 @@ angular.module('issueTrackerSystem.users.profile', ['issueTrackerSystem.users.id
                     return true;
                 }
 
+                function validatePassword(passwordData) {
+                    if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confNewPassword) {
+                        notification.error('Fill all blank fields');
+                        return false;
+                    }
+                    if (passwordData.confNewPassword !== passwordData.newPassword) {
+                        notification.error('Passwords do not match.')
+                    }
+
+                }
+
                 $scope.checkGender = function (genderToCheck) {
                     return $scope.user ? genderToCheck === $scope.user.gender : false;
+                };
+
+                $scope.tab = 1;
+
+                $scope.isSet = function (checkTab) {
+                    return $scope.tab === checkTab;
+                };
+
+                $scope.setTab = function (activeTab) {
+                    $scope.tab = activeTab;
                 };
 
                 identity.getCurrentUser()
                     .then(function (userData) {
                         $scope.user = userData;
-                    })
+                    });
+
+                $scope.editProfile = function (user) {
+                    if (validateUserData(user)) {
+                        console.log(user);
+                    }
+                };
+
+                $scope.changePassword = function (passwordData) {
+                    if (validatePassword(passwordData)) {
+                        console.log(passwordData);
+                    }
+                }
 
             }]);
