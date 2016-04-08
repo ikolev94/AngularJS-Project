@@ -7,10 +7,12 @@ angular.module('issueTrackerSystem.users.authentication', [])
 
         function register(user) {
             var defer = $q.defer();
-            $http.post(usersUrl + 'register', user)
+            $http.post(BASE_URL + 'Account/Register', user)
                 .then(function (respond) {
+                    console.log(respond);
                     defer.resolve(respond.data);
                 }, function (error) {
+                    console.log(error);
                     defer.reject(error.data.message)
                 });
             return defer.promise;
