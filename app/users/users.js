@@ -33,6 +33,7 @@ angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentica
                     $loginForm.hide();
                     $loginFormLink.removeClass('active');
                     $(this).addClass('active');
+                    $('option:contains(Other)').attr('selected', 'selected');
                     e.preventDefault();
                 });
 
@@ -72,7 +73,7 @@ angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentica
                     return true;
                 }
 
-                // $scope.registerUser.gender = '0';
+                $scope.genders = {'Other': 0, 'Male': 1, 'Female': 2};
 
                 $scope.login = function (user) {
                     if (validateLoginUser(user)) {

@@ -62,11 +62,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="reg-gender" class="control-label">Gender</label>
-                                    <select ng-model="registerUser.gender" tabindex="6" class="form-control"
+                                    <select ng-model="registerUser.gender" ng-options="k as v for (v,k) in genders"
+                                            tabindex="6" class="form-control"
                                             id="reg-gender">
-                                        <option value="0" selected>Other</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
                                     </select>
                                     <br>
                                 </div>
