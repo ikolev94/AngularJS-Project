@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackerSystem.dashboard', ['issueTrackerSystem.dashboard.issue'])
+angular.module('issueTrackerSystem.dashboard', ['services.issueService'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -22,7 +22,6 @@ angular.module('issueTrackerSystem.dashboard', ['issueTrackerSystem.dashboard.is
             issueService.getMyIssues()
                 .then(function (response) {
                     $scope.issues = response.Issues;
-                    console.log(response);
                 }, function (error) {
                     console.log(error);
                 })

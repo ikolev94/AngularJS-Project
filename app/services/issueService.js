@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('issueTrackerSystem.dashboard.issue', [])
+angular.module('services.issueService', [])
     .factory('issueService', [
         '$http',
         '$q',
@@ -20,7 +20,19 @@ angular.module('issueTrackerSystem.dashboard.issue', [])
                 return defer.promise;
             }
 
+            function getIssueById(id) {
+                var defer = $q.defer();
+                $http.get(baseUrl + id)
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             return {
-                getMyIssues: getMyIssues
+                getMyIssues: getMyIssues,
+                getIssueById: getIssueById
             };
         }]);

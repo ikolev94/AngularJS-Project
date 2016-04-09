@@ -7,7 +7,8 @@ angular.module('issueTrackerSystem', [
         'issueTrackerSystem.notification',
         'issueTrackerSystem.users',
         'issueTrackerSystem.users.profile',
-        'issueTrackerSystem.dashboard'
+        'issueTrackerSystem.dashboard',
+        'issueTrackerSystem.issue'
     ])
     .constant("BASE_URL", 'http://softuni-issue-tracker.azurewebsites.net/api/')
     .config(['$routeProvider', function ($routeProvider) {
