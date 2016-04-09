@@ -1,4 +1,27 @@
-<div>
-    <h1>Stuff</h1>
-    <h4>fun fun fun...</h4>
+<h1>DASHBOARD</h1>
+<div class="container">
+    <div class="row">
+        <div class="span5">
+            <table class="table table-striped table-condensed">
+                <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th>Project</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in issues">
+                    <td>{{i.Title}}</td>
+                    <td>{{i.Project.Name}}</td>
+                    <td>{{i.DueDate|date}}</td>
+                    <td><span class="label" ng-class="{'label-danger':i.Priority.Id === 1,
+                    'label-warning':i.Priority.Id === 2,'label-primary':i.Priority.Id === 3,}">{{i.Priority.Name}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

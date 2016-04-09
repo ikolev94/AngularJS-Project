@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackerSystem.dashboard', [])
+angular.module('issueTrackerSystem.dashboard', ['issueTrackerSystem.dashboard.issue'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -9,15 +9,22 @@ angular.module('issueTrackerSystem.dashboard', [])
             resolve: {
                 isLogged: function ($location) {
                     if (!sessionStorage.access_token) {
-                        $location.path('/');
+                        //$location.path('/');
                     }
                 }
             }
         });
     }])
 
-    .controller('DashboardCtrl', ['$scope', 'notification', 'authentication',
-        function ($scope, notification, authentication) {
+    .controller('DashboardCtrl', ['$scope', 'notification', 'authentication', 'issueService',
+        function ($scope, notification, authentication, issueService) {
 
+            issueService.getMyIssues()
+                .then(function (response) {
+                    $scope.issues = response.Issues;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
 
         }]);
