@@ -31,8 +31,32 @@ angular.module('services.issueService', [])
                 return defer.promise;
             }
 
+            function getIssueComments(issueId) {
+                var defer = $q.defer();
+                $http.get(baseUrl + issueId + '/comments')
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
+            function addIssuesComment(issueId, comment) {
+                var defer = $q.defer();
+                $http.post(baseUrl + issueId + '/comments', comment)
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             return {
                 getMyIssues: getMyIssues,
-                getIssueById: getIssueById
+                getIssueById: getIssueById,
+                getIssueComments: getIssueComments,
+                addIssuesComment: addIssuesComment
             };
         }]);

@@ -20,7 +20,7 @@ angular.module('issueTrackerSystem.users.authentication', [])
 
         function login(user) {
             var defer = $q.defer();
-            $http.post(usersUrl + 'login', user)
+            $http.post(usersUrl + 'Account/Register', user)
                 .then(function (success) {
                     defer.resolve(success.data);
                 }, function (error) {

@@ -17,8 +17,8 @@
                 <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
                     <!--<img class="img-circle pull-left"-->
-                         <!--src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"-->
-                         <!--alt="Mouse0270"/>-->
+                    <!--src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"-->
+                    <!--alt="Mouse0270"/>-->
 
                     <h2 class="text-center">{{issue.Title}}</h2>
                     <h4 class="text-muted"><span>Due date</span> : <span>{{issue.DueDate|date}}</span></h4>
@@ -41,11 +41,43 @@
                          alt="User Image"/>
 
                     <div class="panel-google-plus-textarea">
-                        <textarea rows="4"></textarea>
-                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+                        <textarea ng-model="newComment.text" rows="4"></textarea>
+                        <button type="submit" class="btn btn-success" ng-disabled="!newComment.text"
+                                ng-click="postComment(newComment)">Post comment
+                        </button>
                         <button type="reset" class="[ btn btn-default ]" ng-click="change()">Cancel</button>
                     </div>
                     <div class="clearfix"></div>
+                </div>
+                <div>
+                    <h2 class="page-header">Comments</h2>
+                    <article ng-repeat="comment in comments" class="row">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive"
+                                     src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg"/>
+                                <figcaption class="text-center">{{comment.Author.Username}}</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <header class="text-left">
+                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
+                                        <time class="comment-date"><i class="glyphicon glyphicon-time"></i>{{comment.CreatedOn|date:'medium'}}
+                                        </time>
+                                    </header>
+                                    <div class="comment-post">
+                                        <p>
+                                            {{comment.Text}}
+                                        </p>
+                                    </div>
+                                    <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i
+                                            class="fa fa-reply"></i> reply</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
