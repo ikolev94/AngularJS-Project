@@ -14,7 +14,7 @@
                 <tbody>
                 <tr ng-repeat="i in issues">
                     <td><a href="#/issues/{{i.Id}}">{{i.Title}}</a></td>
-                    <td><a href="#/projects/{{i.Porject.Id}}">{{i.Project.Name}}</a></td>
+                    <td><a href="#/projects/{{i.Project.Id}}">{{i.Project.Name}}</a></td>
                     <td>{{i.DueDate|date}}</td>
                     <td><span class="label" ng-class="{'label-danger':i.Priority.Id === 3,
                     'label-warning':i.Priority.Id === 2,'label-primary':i.Priority.Id === 1,}">{{i.Priority.Name}}</span>

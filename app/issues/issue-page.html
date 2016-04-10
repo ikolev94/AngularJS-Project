@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="[ col-xs-12 col-sm-offset-1 col-sm-5 ]">
-            <div class="[ panel panel-default ] panel-google-plus">
+        <div class="col-xs-12 col-smd-7">
+            <div class="panel panel-default panel-google-plus">
                 <div class="dropdown">
                     <span class="dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
                     </span>
                     <ul class="dropdown-menu" role="menu">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
@@ -14,28 +14,26 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
                     </ul>
                 </div>
-                <div class="panel-google-plus-tags">
-                    <ul>
-                        <li>#Millennials</li>
-                        <li>#Generation</li>
-                    </ul>
-                </div>
+                <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
-                    <img class="[ img-circle pull-left ]"
-                         src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"
-                         alt="Mouse0270"/>
+                    <!--<img class="img-circle pull-left"-->
+                         <!--src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"-->
+                         <!--alt="Mouse0270"/>-->
 
-                    <h3>{{issue.Title}}</h3>
-                    <h5><span>Due date</span> - <span>{{issue.DueDate|date}}</span></h5>
+                    <h2 class="text-center">{{issue.Title}}</h2>
+                    <h4 class="text-muted"><span>Due date</span> : <span>{{issue.DueDate|date}}</span></h4>
+                    <h5 class="text-muted">Assignee : {{issue.Assignee.Username}}</h5>
                 </div>
                 <div class="panel-body">
-                    <p>{{issue.Description}}</p>
+                    <h4 class="container">{{issue.Description}}</h4>
                 </div>
+                <h4 class="text-center">{{issue.Author.Username}} open this issue in project: <a
+                        href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></h4>
                 <div class="panel-footer">
-                    <button type="button" class="[ btn btn-default ]">+1</button>
-                    <button type="button" class="[ btn btn-default ]">
-                        <span class="[ glyphicon glyphicon-share-alt ]"></span>
-                    </button>
+                    <!--<button type="button" class="[ btn btn-default ]">+1</button>-->
+                    <!--<button type="button" class="[ btn btn-default ]">-->
+                    <!--<span class="[ glyphicon glyphicon-share-alt ]"></span>-->
+                    <!--</button>-->
                     <div ng-click="change()" ng-show="!inCommentMode" class="input-placeholder">Add a comment...</div>
                 </div>
                 <div ng-show="inCommentMode" class="panel-google-plus-comment">
