@@ -18,9 +18,22 @@ angular.module('issueTrackerSystem.dashboard', ['services.issueService'])
 
     .controller('DashboardCtrl', ['$scope', 'notification', 'authentication', 'issueService',
         function ($scope, notification, authentication, issueService) {
+            var page = 1;
+            $scope.currentPage = page;
+            $scope.pageSize = 10;
 
-            issueService.getMyIssues()
+            $scope.changePage = function (a) {
+                page = a;
+                issueService.getMyIssues(a)
+                    .then(function (response) {
+                        $scope.total = response.TotalPages * 10;
+                        $scope.issues = response.Issues;
+                    })
+            };
+
+            issueService.getMyIssues(page)
                 .then(function (response) {
+                    $scope.total = response.TotalPages * 10;
                     $scope.issues = response.Issues;
                 }, function (error) {
                     console.log(error);

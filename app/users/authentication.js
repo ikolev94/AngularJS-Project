@@ -20,12 +20,25 @@ angular.module('issueTrackerSystem.users.authentication', [])
 
         function login(user) {
             var defer = $q.defer();
-            $http.post(usersUrl + 'Account/Register', user)
-                .then(function (success) {
-                    defer.resolve(success.data);
-                }, function (error) {
-                    defer.reject(error.data.error_description || error.data.message);
-                });
+            user.grant_type = 'password';
+            // $http.post(BASE_URL + 'Token', user)
+            //     .then(function (success) {
+            //         defer.resolve(success.data);
+            //     }, function (error) {
+            //         defer.reject(error.data.error_description || error.data.message);
+            //     });
+
+            jQuery.ajax({
+                method: 'POST',
+                url: BASE_URL + 'Token',
+                data: da,
+                success: function (data) {
+                    defer.resolve(data)
+                },
+                error: function (error) {
+                    defer.reject(error)
+                }
+            });
             return defer.promise;
         }
 

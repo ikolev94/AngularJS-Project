@@ -12,7 +12,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="i in issues">
+                <tr ng-repeat="i in issues | orderBy:'-DueDate'">
                     <td><a href="#/issues/{{i.Id}}">{{i.Title}}</a></td>
                     <td><a href="#/projects/{{i.Project.Id}}">{{i.Project.Name}}</a></td>
                     <td>{{i.DueDate|date}}</td>
@@ -21,6 +21,12 @@
                     </td>
                 </tr>
                 </tbody>
+                <div paging
+                     page="currentPage"
+                     page-size="pageSize"
+                     total="total"
+                     paging-action="changePage(page)">
+                </div>
             </table>
         </div>
     </div>
