@@ -11,8 +11,9 @@ angular.module('issueTrackerSystem', [
         'issueTrackerSystem.dashboard',
         'issueTrackerSystem.issue',
         'issueTrackerSystem.project',
+        'issueTrackerSystem.directives.addIssue'
     ])
-    .constant("BASE_URL", 'http://softuni-issue-tracker.azurewebsites.net/api/')
+    .constant("BASE_URL", 'http://softuni-issue-tracker.azurewebsites.net/')
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/dashboard'});
     }]);

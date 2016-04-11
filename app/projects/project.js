@@ -24,12 +24,6 @@ angular.module('issueTrackerSystem.project', ['services.projectService', 'servic
             'authentication',
             'projectService',
             function ($scope, $routeParams, notification, authentication, projectService) {
-
-                $scope.inCommentMode = false;
-                $scope.change = function () {
-                    $scope.inCommentMode = !$scope.inCommentMode;
-                };
-
                 projectService.getProjectById($routeParams.id)
                     .then(function (projectData) {
                         $scope.project = projectData;

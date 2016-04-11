@@ -25,24 +25,18 @@
                 <h4 class="text-center" ng-repeat="label in project.Labels">{{label.Name}}
                     <!--<a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>-->
                 </h4>
-                <div class="panel-footer">
-                    <div ng-click="change()" ng-show="!inCommentMode" class="input-placeholder">Add a comment...</div>
+                <div class="center">
+                    <button data-toggle="modal" data-target="#squarespaceModal"
+                            class="btn btn-primary center-block">Add a issue...
+                    </button>
                 </div>
-                <div ng-show="inCommentMode" class="panel-google-plus-comment">
-                    <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46"
-                         alt="User Image"/>
-                    <div class="panel-google-plus-textarea">
-                        <textarea rows="4"></textarea>
-                        <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
-                        <button type="reset" class="[ btn btn-default ]" ng-click="change()">Cancel</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                <div add-issue></div>
                 <h2 class="text-center">Project issues</h2>
                 <table class="container table table-striped table-condensed">
                     <tbody>
                     <tr ng-repeat="issue in issues">
-                        <td style="vertical-align: middle" class="text-center"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                        <td style="vertical-align: middle" class="text-center"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        </td>
                         <td style="vertical-align: middle">{{issue.DueDate|date}}</td>
                         <td><h4><span class="label" ng-class="{'label-danger':issue.Priority.Id === 3,
                     'label-warning':issue.Priority.Id === 2,'label-primary':issue.Priority.Id === 1,}">{{issue.Priority.Name}}</span>

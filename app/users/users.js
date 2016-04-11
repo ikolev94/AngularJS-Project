@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentication'])
+angular.module('issueTrackerSystem.users', [
+        'issueTrackerSystem.users.authentication',
+        'issueTrackerSystem.users.identity'
+    ])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -15,7 +18,8 @@ angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentica
             'notification',
             'authentication',
             '$location',
-            function ($scope, notification, authentication, $location) {
+            'identity',
+            function ($scope, notification, authentication, $location, identity) {
                 var $loginFormLink = $('#login-form-link'),
                     $loginForm = $('#login-form'),
                     $registerFormLink = $('#register-form-link'),
@@ -81,6 +85,11 @@ angular.module('issueTrackerSystem.users', ['issueTrackerSystem.users.authentica
                             .then(function (userData) {
                                 notification.success('Welcome ' + userData.userName);
                                 sessionStorage['access_token'] = userData.access_token;
+                                identity.getCurrentUser()
+                                    .then(function (currentUser) {
+                                        sessionStorage['userId'] = currentUser.Id;
+                                        sessionStorage['userName'] = currentUser.Username;
+                                    });
                                 $location.path('/dashboard');
                             }, function (errorMsg) {
                                 notification.error(errorMsg);
