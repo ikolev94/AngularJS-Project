@@ -4,7 +4,7 @@
 angular.module('issueTrackerSystem', [
         'ngRoute',
         'angular-loading-bar',
-        'bw.paging',
+        'ui.bootstrap',
         'issueTrackerSystem.notification',
         'issueTrackerSystem.users',
         'issueTrackerSystem.users.profile',

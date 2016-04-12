@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('issueTrackerSystem.project', [
-        'services.projectService',
-        'services.issueService',
-        'services.usersService'])
+        'services.projectService'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/projects/:id', {
@@ -23,10 +21,8 @@ angular.module('issueTrackerSystem.project', [
         [
             '$scope',
             '$routeParams',
-            'usersService',
-            'issueService',
             'projectService',
-            function ($scope, $routeParams, usersService, issueService, projectService) {
+            function ($scope, $routeParams, projectService) {
                 $scope.issueFilter = sessionStorage['userName'];
                 $scope.nameU = sessionStorage['userName'];
                 projectService.getProjectById($routeParams.id)
@@ -40,32 +36,5 @@ angular.module('issueTrackerSystem.project', [
                     }, function (error) {
                         console.log(error);
                     });
-
-                $scope.getUsers = function () {
-                    if (!$scope.users) {
-                        usersService.getAllUsers()
-                            .then(function (allUsers) {
-                                $scope.users = allUsers;
-                            })
-                    }
-                };
-
-                $scope.getProjects = function () {
-                    if (!$scope.projects) {
-                        projectService.getAllProjects()
-                            .then(function (allProjects) {
-                                $scope.projects = allProjects;
-                            })
-                    }
-                };
-
-                $scope.addIssue = function (newIssue) {
-                    issueService.addIssue(newIssue)
-                        .then(function (success) {
-                            $scope.issues.push(success);
-                        }, function (error) {
-                            console.log(error);
-                        })
-                }
 
             }]);

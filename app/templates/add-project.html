@@ -1,0 +1,64 @@
+<div class="modal" id="addProjectModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="lineModalLabel">New Project</h3>
+            </div>
+            <div class="modal-body">
+                <form name="addProjectForm">
+                    <div class="form-group">
+                        <label for="InputTitle">Name</label>
+                        <input type="text" class="form-control" ng-model="newProject.Name" id="InputTitle"
+                               placeholder="Enter name" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputProjectKey">Project Key</label>
+                        <input type="text" class="form-control" ng-model="newProject.ProjectKey" id="InputProjectKey"
+                               placeholder="Project key" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputDescription">Description</label>
+                        <textarea id="InputDescription" class="form-control" ng-model="newProject.Description"
+                                  style="resize: none" placeholder="..." rows="3" required="required"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputAssigned">Leader</label>
+                        <select id="InputAssigned" required="required" ng-model="newProject.Leader"
+                                class="form-control"
+                                ng-options="u.Id as u.Username for u in users | orderBy: 'Username'">
+                            <option disabled="disabled" value="">-- choose user --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputPriorities">Priorities</label>
+                        <input id="InputPriorities" type="text" ng-model="newProject.PriorityId" class="form-control"
+                               required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="Labels">Labels</label>
+                        <pre>Model: {{labels | json}}</pre>
+                        <input id="Labels" required="required" type="text" ng-model="labels" uib-typeahead="state for state in states
+                        | filter:$viewValue | limitTo:8" class="form-control">
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="saveImage" ng-click="addIssue(newIssue)"
+                                class="btn btn-default btn-hover-green" data-dismiss="modal"
+                                role="button" ng-disabled="addProjectForm.$invalid">Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

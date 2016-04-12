@@ -21,13 +21,14 @@
                     </td>
                 </tr>
                 </tbody>
-                <div paging
-                     page="currentPage"
-                     page-size="pageSize"
-                     total="total"
-                     paging-action="changePage(page)">
-                </div>
+                <uib-pagination direction-links="false" ng-change="pageChanged()" total-items="totalItems"
+                                ng-model="currentPage" num-pages="smallnumPages"></uib-pagination>
             </table>
         </div>
+        <button data-toggle="modal" data-target="#addProjectModal"
+                class="btn btn-primary center-block" ng-click="">Add Project
+        </button>
+        <div add-issue></div>
+        <div add-project></div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackerSystem.dashboard', ['services.issueService'])
+angular.module('issueTrackerSystem.dashboard', ['services.issueService','issueTrackerSystem.directives.addProject'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -18,23 +18,24 @@ angular.module('issueTrackerSystem.dashboard', ['services.issueService'])
 
     .controller('DashboardCtrl', ['$scope', 'notification', 'authentication', 'issueService',
         function ($scope, notification, authentication, issueService) {
-            var page = 1,
-                ISSUES_PER_PAGE = 10;
-            $scope.currentPage = page;
-            $scope.pageSize = 10;
+            // var page = 1,
+               var ISSUES_PER_PAGE = 10;
+            // $scope.currentPage = page;
+            // $scope.pageSize = 10;
+            // $scope.totalItems = 64;
+            $scope.currentPage = 1;
 
-            $scope.changePage = function (a) {
-                page = a;
-                issueService.getMyIssues(a)
+            $scope.pageChanged = function () {
+                issueService.getMyIssues($scope.currentPage)
                     .then(function (response) {
-                        $scope.total = response.TotalPages * ISSUES_PER_PAGE;
+                        $scope.totalItems = response.TotalPages * ISSUES_PER_PAGE;
                         $scope.issues = response.Issues;
                     })
             };
 
-            issueService.getMyIssues(page)
+            issueService.getMyIssues($scope.currentPage)
                 .then(function (response) {
-                    $scope.total = response.TotalPages * ISSUES_PER_PAGE;
+                    $scope.totalItems = response.TotalPages * ISSUES_PER_PAGE;
                     $scope.issues = response.Issues;
                 }, function (error) {
                     console.log(error);
