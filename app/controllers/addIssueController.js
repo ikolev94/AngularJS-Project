@@ -6,6 +6,15 @@ angular.module('addIssueController', [
     .controller('AddIssueCtrl', ['$scope', 'issueService', 'usersService', 'projectService',
         function ($scope, issueService, usersService, projectService) {
 
+
+            $scope.updatePriorities = function () {
+                if ($scope.newIssue && $scope.newIssue.ProjectId) {
+                    $scope.currentProject = $scope.projects.filter(function (p) {
+                        return p.Id === $scope.newIssue.ProjectId;
+                    })[0];
+                }
+            };
+
             $scope.getUsers = function () {
                 if (!$scope.users) {
                     usersService.getAllUsers()
