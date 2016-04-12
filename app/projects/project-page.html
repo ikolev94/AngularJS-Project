@@ -4,17 +4,16 @@
             <div class="panel panel-default panel-google-plus">
                 <div class="dropdown">
                     <span class="dropdown-toggle" type="button" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        <h4><span class="glyphicon glyphicon-chevron-down"></span></h4>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/projects/{{project.Id}}/edit">Edit Project</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
                     </ul>
                 </div>
-                <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
                     <h2 class="text-center">{{project.Name}}</h2>
                     <h5 class="text-muted">Project leader : {{project.Lead.Username}}</h5>
@@ -27,14 +26,21 @@
                 </h4>
                 <div class="center">
                     <button data-toggle="modal" data-target="#squarespaceModal"
-                            class="btn btn-primary center-block">Add a issue...
+                            class="btn btn-primary center-block" ng-click="getUsers();getProjects()">Add a issue...
                     </button>
                 </div>
                 <div add-issue></div>
                 <h2 class="text-center">Project issues</h2>
+                <label for="filterIssues">Filter by:</label>
+                <select id="filterIssues" ng-model="issueFilter" class="form-control">
+                    <option selected="selected" value="{{nameU}}">My issues</option>
+                    <option value="Open">Open</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="">All issues</option>
+                </select>
                 <table class="container table table-striped table-condensed">
                     <tbody>
-                    <tr ng-repeat="issue in issues">
+                    <tr ng-repeat="issue in issues|filter:issueFilter">
                         <td style="vertical-align: middle" class="text-center"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>
                         <td style="vertical-align: middle">{{issue.DueDate|date}}</td>

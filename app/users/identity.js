@@ -23,12 +23,14 @@ angular.module('issueTrackerSystem.users.identity', [])
             }
             return {
                 getCurrentUser: function () {
-                    if (currentUser) {
-                        return $q.when(currentUser);
-                    }
-                    else {
-                        return deferred.promise;
-                    }
+                    var deferred = $q.defer();
+                    $http.get(BASE_URL + 'users/me', {headers: {Authorization: 'Bearer ' + sessionStorage['access_token']}})
+                        .then(function (response) {
+                            // currentUser = response.data;
+                            deferred.resolve(response.data);
+                        });
+                    return deferred.promise;
+
                 },
                 isAuthenticated: function () {
                     return true;

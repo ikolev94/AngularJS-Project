@@ -4,6 +4,7 @@ angular.module('issueTrackerSystem.directives.addIssue', [])
     .directive('addIssue', [function () {
         return {
             restrict: 'A',
-            templateUrl: 'directives/add-issue/add-issue.html'
+            templateUrl: 'directives/add-issue/add-issue.html',
+            controller: 'AddIssueCtrl'
         }
     }]);
