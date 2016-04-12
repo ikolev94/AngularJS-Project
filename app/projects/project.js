@@ -27,12 +27,17 @@ angular.module('issueTrackerSystem.project', ['services.projectService', 'servic
                 projectService.getProjectById($routeParams.id)
                     .then(function (projectData) {
                         $scope.project = projectData;
+                        // $scope.projects = [projectData];
                         projectService.getProjectIssues($routeParams.id)
                             .then(function (issuesData) {
                                 $scope.issues = issuesData;
                             })
                     }, function (error) {
                         console.log(error);
-                    })
+                    });
+
+                $scope.addIssue = function (newIssue) {
+                    console.log(newIssue);
+                }
 
             }]);

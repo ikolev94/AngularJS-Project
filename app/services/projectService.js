@@ -33,8 +33,21 @@ angular.module('services.projectService', [])
                 return defer.promise;
             }
 
+            function getAllProjects() {
+                var defer = $q.defer();
+                $http.get(baseUrl)
+                    .then(function (respond) {
+                        console.log(respond);
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             return {
                 getProjectById: getProjectById,
-                getProjectIssues: getProjectIssues
+                getProjectIssues: getProjectIssues,
+                getAllProjects: getAllProjects
             };
         }]);
