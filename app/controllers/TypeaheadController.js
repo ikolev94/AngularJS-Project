@@ -1,13 +1,15 @@
 "use strict";
-angular.module('TypeAheadController', ['services.typeAhead'])
-    .controller('TypeAheadCtrl', ['$scope', 'typeAheadService',
-        function ($scope, typeAheadService) {
-            typeAheadService.get('states.json')
-                .then(function (data) {
-                    $scope.items = data;
-                });
+angular.module('TypeAheadController', ['services.label'])
+    .controller('TypeAheadCtrl', ['$scope', 'labelService',
+        function ($scope, labelService) {
             $scope.name = "";
             $scope.onItemSelected = function () {
                 console.log('selected=' + $scope.name);
+            };
+            $scope.onItemChange = function (input) {
+                labelService.getLabels(input)
+                    .then(function (data) {
+                        $scope.items = data;
+                    });
             }
         }]);
