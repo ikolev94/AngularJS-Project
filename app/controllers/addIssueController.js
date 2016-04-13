@@ -2,7 +2,8 @@
 angular.module('addIssueController', [
         'services.issueService',
         'services.usersService',
-        'services.projectService'])
+        'services.projectService',
+        'issueTrackerSystem.directives.typeahead'])
     .controller('AddIssueCtrl',
         [
             '$scope',
