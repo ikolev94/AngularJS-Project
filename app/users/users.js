@@ -99,10 +99,9 @@ angular.module('issueTrackerSystem.users', [
                 $scope.register = function (user) {
                     if (validateRegisterUser(user)) {
                         authentication.register(user)
-                            .then(function (userData) {
-                                notification.success('Welcome ' + userData.userName);
-                                sessionStorage['access_token'] = userData.access_token;
-                                $location.path('/dashboard');
+                            .then(function (success) {
+                                user.username = user.email;
+                                $scope.login(user)
                             }, function (errorMsg) {
                                 notification.error(errorMsg);
                             });
