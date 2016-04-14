@@ -56,10 +56,22 @@ angular.module('services.projectService', [])
                 return defer.promise;
             }
 
+            function updateProject(id, project) {
+                var defer = $q.defer();
+                $http.put(baseUrl + id, project)
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             return {
                 getProjectById: getProjectById,
                 getProjectIssues: getProjectIssues,
                 getAllProjects: getAllProjects,
-                addProject: addProject
+                addProject: addProject,
+                updateProject: updateProject
             };
         }]);

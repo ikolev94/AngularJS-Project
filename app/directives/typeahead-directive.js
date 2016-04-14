@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('issueTrackerSystem.directives.typeahead', ['addProjectController'])
+angular.module('issueTrackerSystem.directives.typeahead', [])
     .directive('typeahead', ['$timeout',
         function ($timeout) {
             return {
@@ -17,7 +17,8 @@ angular.module('issueTrackerSystem.directives.typeahead', ['addProjectController
                     scope.handleSelection = function (selectedItem) {
                         if (scope.model) {
                             var currentModel = scope.model.match(/.+\s+/);
-                            scope.model = currentModel ? currentModel + ', ' + selectedItem : selectedItem;
+                            scope.model = currentModel ? currentModel + ' ' + selectedItem : selectedItem + ' ';
+                            scope.model = scope.model.replace(/\s+/g, ' ');
                         } else {
                             scope.model = selectedItem;
                         }
@@ -36,7 +37,25 @@ angular.module('issueTrackerSystem.directives.typeahead', ['addProjectController
                         scope.current = index;
                     };
                 },
-                controller: 'AddProjectCtrl',
+                controller: 'TypeaheadCtrl',
                 templateUrl: 'templates/typeAhead.html'
             }
-        }]);
+        }])
+    .controller('TypeaheadCtrl', ['$scope', 'labelService', function ($scope, labelService) {
+        $scope.onItemChange = function (input) {
+            if (input) {
+                var lastInput = input.split(/\s+|\,/)
+                    .filter(function (el) {
+                        return el;
+                    })
+                    .slice(-1)
+                    .pop();
+                if (lastInput) {
+                    labelService.getLabels(lastInput)
+                        .then(function (data) {
+                            $scope.items = data;
+                        });
+                }
+            }
+        };
+    }]);

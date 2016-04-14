@@ -7,22 +7,22 @@ angular.module('addProjectController', [
     .controller('AddProjectCtrl', ['$scope', 'usersService', 'projectService', 'notification', 'labelService',
         function ($scope, usersService, projectService, notification, labelService) {
 
-            $scope.onItemChange = function (input) {
-                if (input) {
-                    var lastInput = input.split(/\s+|\,/)
-                        .filter(function (el) {
-                            return el;
-                        })
-                        .slice(-1)
-                        .pop();
-                    if (lastInput) {
-                        labelService.getLabels(lastInput)
-                            .then(function (data) {
-                                $scope.items = data;
-                            });
-                    }
-                }
-            };
+            // $scope.onItemChange = function (input) {
+            //     if (input) {
+            //         var lastInput = input.split(/\s+|\,/)
+            //             .filter(function (el) {
+            //                 return el;
+            //             })
+            //             .slice(-1)
+            //             .pop();
+            //         if (lastInput) {
+            //             labelService.getLabels(lastInput)
+            //                 .then(function (data) {
+            //                     $scope.items = data;
+            //                 });
+            //         }
+            //     }
+            // };
 
             usersService.getAllUsers()
                 .then(function (allUsers) {
@@ -34,10 +34,7 @@ angular.module('addProjectController', [
                 projectToAdd.inputPriorities.split(/[\s+|,]+/).forEach(function (p) {
                     projectToAdd.Priorities.push({Name: p});
                 });
-                projectToAdd.Labels = [];
-                $scope.name.split(/[\s+|,]+/).forEach(function (p) {
-                    projectToAdd.Labels.push({Name: p});
-                });
+                projectToAdd.Labels = labelService.stringToLabels($scope.inputLabels);
                 projectService.addProject(projectToAdd)
                     .then(function (respond) {
                         notification.success('New Project added');

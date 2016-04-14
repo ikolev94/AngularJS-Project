@@ -32,13 +32,12 @@
                 </div>
                 <div class="form-group">
                     <label for="InputPriorities">Priorities</label>
-                    <input id="InputPriorities" type="text" ng-model="newProject.inputPriorities"
-                           class="form-control"
-                           required="required">
+                    <input id="InputPriorities" ng-model="newProject.Priorities" class="form-control"
+                           type="text" required="required">
                 </div>
                 <div class="form-group">
                     <typeahead items="items" prompt="Start typing labels" title="Name" subtitle="abbreviation"
-                               model="name" on-select="onItemSelected()"/>
+                               model="inputLabels" on-select="onItemSelected()"/>
                 </div>
             </form>
 
@@ -46,7 +45,7 @@
         <div class="modal-footer">
             <div class="btn-group btn-group-justified" role="group" aria-label="group button">
                 <div class="btn-group" role="group">
-                    <button type="button" id="saveImage" ng-click="addProject(newProject)"
+                    <button type="button" ng-click="updateProject(newProject)"
                             class="btn btn-default btn-hover-green" data-dismiss="modal"
                             role="button" ng-disabled="addProjectForm.$invalid">Save
                     </button>
