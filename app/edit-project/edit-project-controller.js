@@ -2,7 +2,6 @@
 
 angular.module('issueTrackerSystem.editProjectController', [
         'services.projectService',
-        'services.projectService',
         'services.label'])
 
     .controller('EditProjectCtrl',
@@ -24,6 +23,7 @@ angular.module('issueTrackerSystem.editProjectController', [
                         $scope.newProject.Priorities = $scope.newProject.Priorities.map(function (el) {
                             return el.Name
                         }).join(', ');
+                        $scope.newProject.LeadId = projectData.Lead.Id;
                     }, function (error) {
                         console.log(error);
                     });

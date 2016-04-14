@@ -65,11 +65,23 @@ angular.module('services.issueService', [])
                 return defer.promise;
             }
 
+            function updateIssue(issueId, issue) {
+                var defer = $q.defer();
+                $http.put(baseUrl + issueId, issue)
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             return {
                 getMyIssues: getMyIssues,
                 getIssueById: getIssueById,
                 getIssueComments: getIssueComments,
                 addIssuesComment: addIssuesComment,
-                addIssue: addIssue
+                addIssue: addIssue,
+                updateIssue: updateIssue
             };
         }]);

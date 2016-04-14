@@ -7,7 +7,7 @@
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/issues/{{issue.Id}}/edit">Edit Issue</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
@@ -16,11 +16,7 @@
                 </div>
                 <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
-                    <!--<img class="img-circle pull-left"-->
-                    <!--src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg"-->
-                    <!--alt="Mouse0270"/>-->
-
-                    <h2 class="text-center">{{issue.Title}}</h2>
+                               <h2 class="text-center">{{issue.Title}}</h2>
                     <h4 class="text-muted"><span>Due date</span> : <span>{{issue.DueDate|date}}</span></h4>
                     <h5 class="text-muted">Assignee : {{issue.Assignee.Username}}</h5>
                 </div>
@@ -30,10 +26,6 @@
                 <h4 class="text-center">{{issue.Author.Username}} open this issue in project: <a
                         href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></h4>
                 <div class="panel-footer">
-                    <!--<button type="button" class="[ btn btn-default ]">+1</button>-->
-                    <!--<button type="button" class="[ btn btn-default ]">-->
-                    <!--<span class="[ glyphicon glyphicon-share-alt ]"></span>-->
-                    <!--</button>-->
                     <div ng-click="change()" ng-show="!inCommentMode" class="input-placeholder">Add a comment...</div>
                 </div>
                 <div ng-show="inCommentMode" class="panel-google-plus-comment">

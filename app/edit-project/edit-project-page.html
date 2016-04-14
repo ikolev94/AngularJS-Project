@@ -1,12 +1,10 @@
 <div class="modal-dialog">
     <div class="col-lg-12">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
-                    class="sr-only">Close</span></button>
             <h3 class="modal-title" id="lineModalLabel">Edit Project</h3>
         </div>
         <div class="modal-body">
-            <form name="addProjectForm">
+            <form name="editProjectForm">
                 <div class="form-group">
                     <label for="InputTitle">Name</label>
                     <input type="text" class="form-control" ng-model="newProject.Name" id="InputTitle"
@@ -47,7 +45,7 @@
                 <div class="btn-group" role="group">
                     <button type="button" ng-click="updateProject(newProject)"
                             class="btn btn-default btn-hover-green" data-dismiss="modal"
-                            role="button" ng-disabled="addProjectForm.$invalid">Save
+                            role="button" ng-disabled="editProjectForm.$invalid">Save
                     </button>
                 </div>
             </div>

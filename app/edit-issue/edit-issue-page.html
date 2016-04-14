@@ -1,0 +1,59 @@
+<div class="modal-dialog">
+    <div class="col-lg-12">
+        <div class="modal-header">
+            <h3 class="modal-title" id="lineModalLabel">Edit Issue</h3>
+        </div>
+        <div class="modal-body">
+            <form name="editIssueForm">
+                <div class="form-group">
+                    <label for="InputTitle">Title</label>
+                    <input type="text" class="form-control" ng-model="newIssue.Title" id="InputTitle"
+                           placeholder="Enter title" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="InputDescription">Description</label>
+                        <textarea id="InputDescription" class="form-control" ng-model="newIssue.Description"
+                                  rows="3" required="required"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Project</label>
+                    <select id="exampleInputPassword1" ng-model="newIssue.ProjectId"
+                            class="form-control" ng-change="updatePriorities()" required="required"
+                            ng-options="p.Id as p.Name for p in projects">
+                        <option disabled="disabled" value="">-- choose project --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="InputAssigned">Assigned</label>
+                    <select id="InputAssigned" required="required" ng-model="newIssue.AssigneeId"
+                            class="form-control"
+                            ng-options="u.Id as u.Username for u in users | orderBy: 'Username'">
+                        <option disabled="disabled" value="">-- choose user --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="InputPriorities">Priorities</label>
+                    <select id="InputPriorities" ng-model="newIssue.PriorityId" class="form-control"
+                            ng-options="priority.Id as priority.Name for priority in currentProject.Priorities"
+                            required="required">
+                        <option disabled="disabled" value="">-- choose priority --</option>
+                    </select>
+                </div>
+                <label for="dueDate">DueDate</label>
+                <input class="form-control" ng-model="newIssue.DueDate" name="registration_date" id="dueDate"
+                       type="date" required="required">
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                <div class="btn-group" role="group">
+                    <button type="button" id="saveImage" ng-click="updateIssue(newIssue)"
+                            class="btn btn-default btn-hover-green" data-dismiss="modal"
+                            role="button" ng-disabled="editIssueForm.$invalid">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
