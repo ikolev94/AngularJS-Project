@@ -1,24 +1,10 @@
 'use strict';
 
-angular.module('issueTrackerSystem.project.edit', [
+angular.module('issueTrackerSystem.editProjectController', [
         'services.projectService',
         'services.issueService',
         'services.usersService'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/projects/:id/edit', {
-            templateUrl: 'projects/project-page.html',
-            controller: 'EditProjectCtrl',
-            resolve: {
-                isLogged: function ($location) {
-                    if (!sessionStorage.access_token) {
-                        //$location.path('/');
-                    }
-                }
-            }
-        });
-    }])
-
+    
     .controller('EditProjectCtrl',
         [
             '$scope',

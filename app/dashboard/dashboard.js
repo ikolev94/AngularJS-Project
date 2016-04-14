@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackerSystem.dashboard', ['services.issueService','issueTrackerSystem.directives.addProject'])
+angular.module('issueTrackerSystem.dashboard', ['services.issueService', 'issueTrackerSystem.directives.addProject'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -18,11 +18,8 @@ angular.module('issueTrackerSystem.dashboard', ['services.issueService','issueTr
 
     .controller('DashboardCtrl', ['$scope', 'notification', 'authentication', 'issueService',
         function ($scope, notification, authentication, issueService) {
-            // var page = 1,
-               var ISSUES_PER_PAGE = 10;
-            // $scope.currentPage = page;
-            // $scope.pageSize = 10;
-            // $scope.totalItems = 64;
+            var ISSUES_PER_PAGE = 10;
+
             $scope.currentPage = 1;
 
             $scope.pageChanged = function () {

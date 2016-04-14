@@ -7,7 +7,7 @@
                         <h4><span class="glyphicon glyphicon-chevron-down"></span></h4>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/projects/{{project.Id}}/edit">Edit Project</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/projects/{{project.Id}}/edit">Edit Project</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
@@ -21,9 +21,10 @@
                 <div class="panel-body">
                     <h4>{{project.Description}}</h4>
                 </div>
-                <h4 class="text-center" ng-repeat="label in project.Labels">{{label.Name}}
-                    <!--<a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>-->
-                </h4>
+                <div class="text-center">
+                    <span class="glyphicon glyphicon-tag"></span>
+                    <span ng-repeat="label in project.Labels">&nbsp;{{label.Name}}&nbsp;</span>
+                </div>
                 <div class="center">
                     <button data-toggle="modal" data-target="#squarespaceModal"
                             class="btn btn-primary center-block" ng-click="getUsers();getProjects()">Add a issue...

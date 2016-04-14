@@ -1,0 +1,57 @@
+<div class="modal-dialog">
+    <div class="col-lg-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                    class="sr-only">Close</span></button>
+            <h3 class="modal-title" id="lineModalLabel">Edit Project</h3>
+        </div>
+        <div class="modal-body">
+            <form name="addProjectForm">
+                <div class="form-group">
+                    <label for="InputTitle">Name</label>
+                    <input type="text" class="form-control" ng-model="newProject.Name" id="InputTitle"
+                           placeholder="Enter name" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="InputProjectKey">Project Key</label>
+                    <input type="text" class="form-control" ng-model="newProject.ProjectKey" id="InputProjectKey"
+                           placeholder="Project key" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="InputDescription">Description</label>
+                        <textarea id="InputDescription" class="form-control" ng-model="newProject.Description"
+                                  placeholder="..." rows="3" required="required"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="InputAssigned">Leader</label>
+                    <select id="InputAssigned" required="required" ng-model="newProject.LeadId"
+                            class="form-control"
+                            ng-options="u.Id as u.Username for u in users | orderBy: 'Username'">
+                        <option disabled="disabled" value="">-- choose user --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="InputPriorities">Priorities</label>
+                    <input id="InputPriorities" type="text" ng-model="newProject.inputPriorities"
+                           class="form-control"
+                           required="required">
+                </div>
+                <div class="form-group">
+                    <typeahead items="items" prompt="Start typing labels" title="Name" subtitle="abbreviation"
+                               model="name" on-select="onItemSelected()"/>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                <div class="btn-group" role="group">
+                    <button type="button" id="saveImage" ng-click="addProject(newProject)"
+                            class="btn btn-default btn-hover-green" data-dismiss="modal"
+                            role="button" ng-disabled="addProjectForm.$invalid">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

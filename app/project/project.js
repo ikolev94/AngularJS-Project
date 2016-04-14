@@ -5,7 +5,7 @@ angular.module('issueTrackerSystem.project', [
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/projects/:id', {
-            templateUrl: 'projects/project-page.html',
+            templateUrl: 'project/project-page.html',
             controller: 'ProjectCtrl',
             resolve: {
                 isLogged: function ($location) {
@@ -28,7 +28,7 @@ angular.module('issueTrackerSystem.project', [
                 projectService.getProjectById($routeParams.id)
                     .then(function (projectData) {
                         $scope.project = projectData;
-                        // $scope.projects = [projectData];
+                        // $scope.project = [projectData];
                         projectService.getProjectIssues($routeParams.id)
                             .then(function (issuesData) {
                                 $scope.issues = issuesData;

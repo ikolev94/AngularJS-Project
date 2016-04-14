@@ -5,4 +5,5 @@
 /*add issue modal*/
 .center{margin-top:50px}.modal-header{padding-bottom:5px}.modal-footer{padding:0}.modal-footer .btn-group button{height:40px;border-top-left-radius:0;border-top-right-radius:0;border:none;border-right:1px solid #ddd}.modal-footer .btn-group:last-child>button{border-right:0}
 /*typehead*/
-.item{text-align:left;margin-top:10px;background:#F2F2F2;box-shadow:0 0 5px #CCC}.item.title{font-size:18px;font-weight:700}.activeLabel{background-color:#C44741;color:#f2f2f2}
+.item{text-align:left;margin-top:10px;background:#F2F2F2;box-shadow:0 0 5px #CCC}textarea{resize: none!important;}.item.title{font-size:18px;font-weight:700}.activeLabel{background-color:#C44741;color:#f2f2f2}
+.activeProject{color:#3C763D;background-color:#bdf09a;border-color:#D6E9C6;}

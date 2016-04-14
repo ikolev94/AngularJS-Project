@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="InputDescription">Description</label>
                         <textarea id="InputDescription" class="form-control" ng-model="newProject.Description"
-                                  style="resize: none" placeholder="..." rows="3" required="required"></textarea>
+                                  placeholder="..." rows="3" required="required"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="InputAssigned">Leader</label>
@@ -38,15 +38,8 @@
                                required="required">
                     </div>
                     <div class="form-group">
-                        <typeahead items="items" prompt="Start typing a US state" title="Name" subtitle="abbreviation"
+                        <typeahead items="items" prompt="Start typing labels" title="Name" subtitle="abbreviation"
                                    model="name" on-select="onItemSelected()"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="Labels">Labels</label>
-                        <pre>Model: {{labels | json}}</pre>
-                        <input id="Labels" type="text" ng-model="labels" uib-typeahead="state for state in states
-                        | filter:$viewValue | limitTo:8" class="form-control">
-
                     </div>
                 </form>
 

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('issueTrackerSystem.directives.typeahead', ['TypeAheadController'])
+angular.module('issueTrackerSystem.directives.typeahead', ['addProjectController'])
     .directive('typeahead', ['$timeout',
         function ($timeout) {
             return {
@@ -15,7 +15,12 @@ angular.module('issueTrackerSystem.directives.typeahead', ['TypeAheadController'
                 },
                 link: function (scope) {
                     scope.handleSelection = function (selectedItem) {
-                        scope.model = selectedItem;
+                        if (scope.model) {
+                            var currentModel = scope.model.match(/.+\s+/);
+                            scope.model = currentModel ? currentModel + ', ' + selectedItem : selectedItem;
+                        } else {
+                            scope.model = selectedItem;
+                        }
                         scope.current = 0;
                         scope.selected = true;
                         $timeout(function () {
@@ -31,7 +36,7 @@ angular.module('issueTrackerSystem.directives.typeahead', ['TypeAheadController'
                         scope.current = index;
                     };
                 },
-                controller: 'TypeAheadCtrl',
+                controller: 'AddProjectCtrl',
                 templateUrl: 'templates/typeAhead.html'
             }
         }]);
