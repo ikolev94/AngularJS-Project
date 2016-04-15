@@ -8,20 +8,18 @@ angular.module('issueTrackerSystem.dashboard', ['services.issueService', 'issueT
 
             $scope.currentPage = 1;
 
-            $scope.pageChanged = function () {
-                issueService.getMyIssues($scope.currentPage)
+            function getMyIssues() {
+                issueService.getMyIssuesSortByDescDueDate($scope.currentPage)
                     .then(function (response) {
                         $scope.totalItems = response.TotalPages * ISSUES_PER_PAGE;
                         $scope.issues = response.Issues;
                     })
+            }
+
+            $scope.pageChanged = function () {
+                getMyIssues();
             };
 
-            issueService.getMyIssues($scope.currentPage)
-                .then(function (response) {
-                    $scope.totalItems = response.TotalPages * ISSUES_PER_PAGE;
-                    $scope.issues = response.Issues;
-                }, function (error) {
-                    console.log(error);
-                })
+            getMyIssues();
 
         }]);
