@@ -18,8 +18,7 @@ angular.module('issueTrackerSystem.users', [
             'notification',
             'authentication',
             '$location',
-            'identity',
-            function ($scope, notification, authentication, $location, identity) {
+            function ($scope, notification, authentication, $location) {
                 var $loginFormLink = $('#login-form-link'),
                     $loginForm = $('#login-form'),
                     $registerFormLink = $('#register-form-link'),
@@ -84,12 +83,6 @@ angular.module('issueTrackerSystem.users', [
                         authentication.login(user)
                             .then(function (userData) {
                                 notification.success('Welcome ' + userData.userName);
-                                sessionStorage['access_token'] = userData.access_token;
-                                identity.getCurrentUser()
-                                    .then(function (currentUser) {
-                                        sessionStorage['userId'] = currentUser.Id;
-                                        sessionStorage['userName'] = currentUser.Username;
-                                    });
                                 $location.path('/dashboard');
                             }, function (errorMsg) {
                                 notification.error(errorMsg);

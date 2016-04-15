@@ -2,6 +2,7 @@
 
 angular.module('issueTrackerSystem', [
         'ngRoute',
+        'ngCookies',
         'angular-loading-bar',
         'ui.bootstrap',
         'issueTrackerSystem.notification',

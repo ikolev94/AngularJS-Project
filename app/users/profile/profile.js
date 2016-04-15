@@ -25,15 +25,15 @@ angular.module('issueTrackerSystem.users.profile', ['issueTrackerSystem.users.id
                     return $scope.user ? genderToCheck === $scope.user.gender : false;
                 };
 
-                identity.getCurrentUser()
+                identity.getUser()
                     .then(function (userData) {
                         $scope.user = userData;
                     });
 
                 $scope.editProfile = function (user) {
-                    if (validateUserData(user)) {
-                        console.log(user);
-                    }
+                    // if (validateUserData(user)) {
+                    //
+                    // }
                 };
 
             }]);

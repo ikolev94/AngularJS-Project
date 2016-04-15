@@ -7,11 +7,9 @@ angular.module('services.usersService', [])
         'BASE_URL',
         function ($http, $q, BASE_URL) {
 
-            $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage['access_token'];
-
             function getAllUsers() {
                 var defer = $q.defer();
-                $http.get(BASE_URL + 'users')
+                $http.get(BASE_URL + 'users', {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
                     }, function (error) {
@@ -22,7 +20,7 @@ angular.module('services.usersService', [])
 
             function changePassword(passwordData) {
                 var defer = $q.defer();
-                $http.post(BASE_URL + 'api/Account/ChangePassword', passwordData)
+                $http.post(BASE_URL + 'api/Account/ChangePassword', passwordData, {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (success) {
                         defer.resolve(success.data);
                     }, function (error) {

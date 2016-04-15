@@ -11,7 +11,8 @@ angular.module('issueTrackerSystem.editIssueController', [
             'projectService',
             'notification',
             '$routeParams',
-            function ($scope, issueService, usersService, projectService, notification, $routeParams) {
+            '$location',
+            function ($scope, issueService, usersService, projectService, notification, $routeParams, $location) {
 
                 $scope.updatePriorities = function () {
                     if ($scope.newIssue && $scope.newIssue.ProjectId) {
@@ -40,10 +41,9 @@ angular.module('issueTrackerSystem.editIssueController', [
                 $scope.updateIssue = function (newIssue) {
                     issueService.updateIssue($routeParams.id, newIssue)
                         .then(function (success) {
-                            console.log(success);
-                            notification.success('Issue updated successfully')
+                            notification.success('Issue updated successfully');
+                            $location.path('/dashboard');
                         }, function (error) {
-                            console.log(error);
                         })
                 }
             }]);
