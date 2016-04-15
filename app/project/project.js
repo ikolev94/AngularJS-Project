@@ -1,21 +1,6 @@
 'use strict';
 
-angular.module('issueTrackerSystem.project', [
-        'services.projectService'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/projects/:id', {
-            templateUrl: 'project/project-page.html',
-            controller: 'ProjectCtrl',
-            resolve: {
-                isLogged: function ($location) {
-                    if (!sessionStorage.access_token) {
-                        //$location.path('/');
-                    }
-                }
-            }
-        });
-    }])
+angular.module('issueTrackerSystem.project', ['services.projectService'])
 
     .controller('ProjectCtrl',
         [

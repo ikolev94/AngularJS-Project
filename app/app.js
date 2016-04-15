@@ -29,6 +29,18 @@ angular.module('issueTrackerSystem', [
                     }
                 }
             })
+            .when('/dashboard', {
+                templateUrl: 'dashboard/dashboard.html',
+                controller: 'DashboardCtrl'
+            })
+            .when('/projects/:id', {
+                templateUrl: 'project/project-page.html',
+                controller: 'ProjectCtrl'
+            })
+            .when('/issues/:id', {
+                templateUrl: 'issues/issue-page.html',
+                controller: 'IssueCtrl'
+            })
             .when('/profile', {
                 templateUrl: 'users/profile/edit-profile.html',
                 controller: 'ProfileCtrl'

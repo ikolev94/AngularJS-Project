@@ -2,20 +2,6 @@
 
 angular.module('issueTrackerSystem.dashboard', ['services.issueService', 'issueTrackerSystem.directives.addProject'])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/dashboard', {
-            templateUrl: 'dashboard/dashboard.html',
-            controller: 'DashboardCtrl',
-            resolve: {
-                isLogged: function ($location) {
-                    if (!sessionStorage.access_token) {
-                        //$location.path('/');
-                    }
-                }
-            }
-        });
-    }])
-
     .controller('DashboardCtrl', ['$scope', 'notification', 'authentication', 'issueService',
         function ($scope, notification, authentication, issueService) {
             var ISSUES_PER_PAGE = 10;

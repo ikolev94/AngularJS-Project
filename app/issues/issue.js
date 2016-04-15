@@ -2,20 +2,6 @@
 
 angular.module('issueTrackerSystem.issue', ['services.issueService'])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/issues/:id', {
-            templateUrl: 'issues/issue-page.html',
-            controller: 'IssueCtrl',
-            resolve: {
-                isLogged: function ($location) {
-                    if (!sessionStorage.access_token) {
-                        //$location.path('/');
-                    }
-                }
-            }
-        });
-    }])
-
     .controller('IssueCtrl',
         [
             '$scope',
