@@ -1,10 +1,7 @@
 <div class="well container">
-    <ul class="nav nav-tabs">
-        <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Profile</a></li>
-        <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Password</a></li>
-    </ul>
+    <h1>Edit Profile</h1>
     <div class="">
-        <div class="tab-pane active in" ng-show="isSet(1)" id="home">
+        <div class="tab-pane active in" id="home">
             <form name="editProfileForm">
                 <label for="edit-name">Name</label>
                 <input type="text" required="required" id="edit-name" ng-model="user.Username" class="form-control">
@@ -29,22 +26,6 @@
                     <button class="btn btn-danger" ng-click="editProfile()" ng-disabled="editProfileForm.$invalid">
                         Update
                     </button>
-                </div>
-            </form>
-        </div>
-        <div class="tab-pane active in" ng-show="isSet(2)" id="profile">
-            <form>
-                <label for="old-pas">Old password</label>
-                <input id="old-pas" ng-model="passwordData.oldPassword" type="password" required="required"
-                       class="form-control">
-                <label for="new-pas">New password</label>
-                <input id="new-pas" ng-model="passwordData.newPassword" type="password" required="required"
-                       class="form-control">
-                <label for="conf-pas">Confirm new password</label>
-                <input id="conf-pas" ng-model="passwordData.confNewPassword" type="password" required="required"
-                       class="form-control">
-                <div>
-                    <button class="btn btn-primary" ng-click="changePassword(passwordData)">Update</button>
                 </div>
             </form>
         </div>

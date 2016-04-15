@@ -7,6 +7,7 @@ angular.module('issueTrackerSystem', [
         'issueTrackerSystem.notification',
         'issueTrackerSystem.users',
         'issueTrackerSystem.users.profile',
+        'issueTrackerSystem.profile.password',
         'issueTrackerSystem.dashboard',
         'issueTrackerSystem.issue',
         'issueTrackerSystem.project',
@@ -27,6 +28,14 @@ angular.module('issueTrackerSystem', [
                         }
                     }
                 }
+            })
+            .when('/profile', {
+                templateUrl: 'users/profile/edit-profile.html',
+                controller: 'ProfileCtrl'
+            })
+            .when('/profile/password', {
+                templateUrl: 'users/profile/edit-password.html',
+                controller: 'PasswordCtrl'
             })
             .when('/projects/:id/edit', {
                 templateUrl: 'edit-project/edit-project-page.html',

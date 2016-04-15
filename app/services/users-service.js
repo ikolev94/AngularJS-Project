@@ -4,14 +4,14 @@ angular.module('services.usersService', [])
     .factory('usersService', [
         '$http',
         '$q',
-        function ($http, $q) {
-            var baseUrl = 'http://softuni-issue-tracker.azurewebsites.net/users/';
+        'BASE_URL',
+        function ($http, $q, BASE_URL) {
 
             $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage['access_token'];
 
             function getAllUsers() {
                 var defer = $q.defer();
-                $http.get(baseUrl)
+                $http.get(BASE_URL + 'users')
                     .then(function (respond) {
                         defer.resolve(respond.data);
                     }, function (error) {
@@ -20,8 +20,19 @@ angular.module('services.usersService', [])
                 return defer.promise;
             }
 
+            function changePassword(passwordData) {
+                var defer = $q.defer();
+                $http.post(BASE_URL + 'api/Account/ChangePassword', passwordData)
+                    .then(function (success) {
+                        defer.resolve(success.data);
+                    }, function (error) {
+                        defer.reject(error.data.error_description || error.data.Message);
+                    });
+                return defer.promise;
+            }
 
             return {
-                getAllUsers: getAllUsers
+                getAllUsers: getAllUsers,
+                changePassword: changePassword
             };
         }]);

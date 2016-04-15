@@ -25,7 +25,6 @@ angular.module('services.projectService', [])
                 var defer = $q.defer();
                 $http.get(baseUrl + id)
                     .then(function (respond) {
-                        console.log(respond);
                         defer.resolve(respond.data);
                     }, function (error) {
                         defer.reject(error.data.message)
@@ -37,7 +36,6 @@ angular.module('services.projectService', [])
                 var defer = $q.defer();
                 $http.get(baseUrl)
                     .then(function (respond) {
-                        console.log(respond);
                         defer.resolve(respond.data);
                     }, function (error) {
                         defer.reject(error.data.message)
