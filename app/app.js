@@ -30,6 +30,10 @@ angular.module('issueTrackerSystem', [
                     }
                 }
             })
+            .when('/', {
+                templateUrl: 'users/users.html',
+                controller: 'UserCtrl'
+            })
             .when('/dashboard', {
                 templateUrl: 'dashboard/dashboard.html',
                 controller: 'DashboardCtrl'
@@ -43,11 +47,11 @@ angular.module('issueTrackerSystem', [
                 controller: 'IssueCtrl'
             })
             .when('/profile', {
-                templateUrl: 'users/profile/edit-profile.html',
+                templateUrl: 'profile/edit-profile.html',
                 controller: 'ProfileCtrl'
             })
             .when('/profile/password', {
-                templateUrl: 'users/profile/edit-password.html',
+                templateUrl: 'profile/edit-password.html',
                 controller: 'PasswordCtrl'
             })
             .when('/projects/:id/edit', {

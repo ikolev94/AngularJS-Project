@@ -4,14 +4,7 @@ angular.module('issueTrackerSystem.users', [
         'issueTrackerSystem.users.authentication',
         'issueTrackerSystem.users.identity'
     ])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'users/users.html',
-            controller: 'UserCtrl'
-        });
-    }])
-
+    
     .controller('UserCtrl',
         [
             '$scope',

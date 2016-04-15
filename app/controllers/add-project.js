@@ -1,28 +1,10 @@
 "use strict";
 angular.module('addProjectController', [
         'services.issueService',
-        'services.usersService',
         'services.projectService',
         'services.label'])
     .controller('AddProjectCtrl', ['$scope', 'usersService', 'projectService', 'notification', 'labelService',
         function ($scope, usersService, projectService, notification, labelService) {
-
-            // $scope.onItemChange = function (input) {
-            //     if (input) {
-            //         var lastInput = input.split(/\s+|\,/)
-            //             .filter(function (el) {
-            //                 return el;
-            //             })
-            //             .slice(-1)
-            //             .pop();
-            //         if (lastInput) {
-            //             labelService.getLabels(lastInput)
-            //                 .then(function (data) {
-            //                     $scope.items = data;
-            //                 });
-            //         }
-            //     }
-            // };
 
             usersService.getAllUsers()
                 .then(function (allUsers) {

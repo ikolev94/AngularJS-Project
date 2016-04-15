@@ -22,13 +22,17 @@ angular.module('issueTrackerSystem.users.authentication', [])
                 $http.post(BASE_URL + 'api/Token', user)
                     .then(function (success) {
                         var tokenValue = success.data.access_token;
-              
+
                         sessionStorage.headers = 'Bearer ' + tokenValue;
-                        // $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
+                        sessionStorage.userName = success.data.userName;
+
+                        $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
                         $http.defaults.headers.common.Authorization = 'Bearer ' + tokenValue;
 
                         $http.get(BASE_URL + 'users/me')
                             .success(function (identityResponse) {
+                                sessionStorage.userId = identityResponse.Id;
+                                sessionStorage.isAdmin = identityResponse.isAdmin;
                                 identity.setUser(identityResponse);
                                 defer.resolve(success.data);
                             })
@@ -41,7 +45,7 @@ angular.module('issueTrackerSystem.users.authentication', [])
             }
 
             function logout() {
-                // $cookies.remove();
+                $cookies.remove();
                 $http.defaults.headers.common.Authorization = null;
                 identity.removeUser();
             }

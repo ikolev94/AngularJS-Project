@@ -1,6 +1,6 @@
 <h1 class="text-center"><span class="glyphicon glyphicon-blackboard"></span><br>Dashboard</h1>
 <div class="container">
-    <button data-toggle="modal" data-target="#addProjectModal"
+    <button ng-if="isAdmin" data-toggle="modal" data-target="#addProjectModal"
             class="btn btn-primary pull-right" ng-click="">Add Project
     </button>
     <div class="row">
@@ -19,7 +19,7 @@
                     <td><a href="#/issues/{{i.Id}}">{{i.Title}}</a></td>
                     <td><a href="#/projects/{{i.Project.Id}}">{{i.Project.Name}}</a></td>
                     <td>{{i.DueDate|date}}</td>
-                    <td><span class="label" ng-class="{'label-danger':i.Priority.Id === 3,
+                    <td><span class="label" ng-class="{'label-info':i.Priority.Id > 3,'label-danger':i.Priority.Id === 3,
                     'label-warning':i.Priority.Id === 2,'label-primary':i.Priority.Id === 1,}">{{i.Priority.Name}}</span>
                     </td>
                 </tr>
