@@ -13,6 +13,7 @@ angular.module('issueTrackerSystem', [
         'issueTrackerSystem.issue',
         'issueTrackerSystem.project',
         'issueTrackerSystem.directives.addIssue',
+        'issueTrackerSystem.directives.userAccess',
         'issueTrackerSystem.projectsController',
         'issueTrackerSystem.editIssueController',
         'issueTrackerSystem.editProjectController'])
@@ -25,7 +26,8 @@ angular.module('issueTrackerSystem', [
                 resolve: {
                     isLogged: function ($location) {
                         if (!sessionStorage.access_token) {
-                            //$location.path('/');
+                            console.log('resolve');
+                            $location.path('/');
                         }
                     }
                 }
