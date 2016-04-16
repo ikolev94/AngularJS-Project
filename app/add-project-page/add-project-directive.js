@@ -4,7 +4,7 @@ angular.module('issueTrackerSystem.directives.addProject', ['addProjectControlle
     .directive('addProject', [function () {
         return {
             restrict: 'A',
-            templateUrl: 'templates/add-project.html',
+            templateUrl: 'add-project-page/add-project.html',
             controller: 'AddProjectCtrl'
         }
     }]);

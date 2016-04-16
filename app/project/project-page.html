@@ -7,7 +7,8 @@
                         <h4><span class="glyphicon glyphicon-chevron-down"></span></h4>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/projects/{{project.Id}}/edit">Edit Project</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/projects/{{project.Id}}/edit">Edit
+                            Project</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
@@ -45,7 +46,7 @@
                         <td style="vertical-align: middle" class="text-center"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>
                         <td style="vertical-align: middle">{{issue.DueDate|date}}</td>
-                        <td><h4><span class="label" ng-class="{'label-danger':issue.Priority.Id === 3,
+                        <td><h4><span class="label" ng-class="{'label-info':issue.Priority.Id > 3,'label-danger':issue.Priority.Id === 3,
                     'label-warning':issue.Priority.Id === 2,'label-primary':issue.Priority.Id === 1,}">{{issue.Priority.Name}}</span>
                         </h4></td>
                     </tr>
