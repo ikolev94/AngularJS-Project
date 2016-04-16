@@ -28,7 +28,8 @@
         </div>
         <div class="text-center">
             <uib-pagination direction-links="false" ng-change="pageChanged()" total-items="totalItems"
-                            ng-model="currentPage" num-pages="smallnumPages"></uib-pagination>
+                            ng-model="currentPage" boundary-link-numbers="true" max-size="7"
+                            num-pages="smallnumPages"></uib-pagination>
         </div>
         <div add-issue></div>
         <div add-project></div>

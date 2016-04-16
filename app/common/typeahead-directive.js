@@ -38,7 +38,7 @@ angular.module('issueTrackerSystem.directives.typeahead', [])
                     };
                 },
                 controller: 'TypeaheadCtrl',
-                templateUrl: 'templates/typeAhead.html'
+                templateUrl: 'common/typeAhead.html'
             }
         }])
     .controller('TypeaheadCtrl', ['$scope', 'labelService', function ($scope, labelService) {
