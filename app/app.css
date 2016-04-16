@@ -7,3 +7,4 @@ div.panel-body > h4{word-wrap:break-word;}.panel-google-plus{position:relative;b
 /*typehead*/
 .item{text-align:left;margin-top:10px;background:#F2F2F2;box-shadow:0 0 5px #CCC}textarea{resize: none!important;}.item.title{font-size:18px;font-weight:700}.activeLabel{background-color:#C44741;color:#f2f2f2}
 .activeProject{color:#3C763D;background-color:#bdf09a;border-color:#D6E9C6;}.margin10{margin: 10px}
+ul > li.change-status>a{background-color: grey;color: greenyellow!important;cursor: default!important;}

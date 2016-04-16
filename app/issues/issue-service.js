@@ -4,12 +4,13 @@ angular.module('services.issueService', [])
     .factory('issueService', [
         '$http',
         '$q',
-        function ($http, $q) {
-            var baseUrl = 'http://softuni-issue-tracker.azurewebsites.net/issues/';
+        'BASE_URL',
+        function ($http, $q, BASE_URL) {
+            var serviceUrl = BASE_URL + 'issues/';
 
             function getMyIssuesSortByDescDueDate(page) {
                 var defer = $q.defer();
-                $http.get(baseUrl + 'me?pageSize=10&pageNumber=' + page + '&orderBy=DueDate desc',
+                $http.get(serviceUrl + 'me?pageSize=10&pageNumber=' + page + '&orderBy=DueDate desc',
                     {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
@@ -21,7 +22,7 @@ angular.module('services.issueService', [])
 
             function addIssue(issue) {
                 var defer = $q.defer();
-                $http.post(baseUrl, issue, {headers: {'Authorization': sessionStorage.headers}})
+                $http.post(serviceUrl, issue, {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond)
                     }, function (error) {
@@ -32,7 +33,7 @@ angular.module('services.issueService', [])
 
             function getIssueById(id) {
                 var defer = $q.defer();
-                $http.get(baseUrl + id, {headers: {'Authorization': sessionStorage.headers}})
+                $http.get(serviceUrl + id, {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
                     }, function (error) {
@@ -43,7 +44,7 @@ angular.module('services.issueService', [])
 
             function getIssueComments(issueId) {
                 var defer = $q.defer();
-                $http.get(baseUrl + issueId + '/comments', {headers: {'Authorization': sessionStorage.headers}})
+                $http.get(serviceUrl + issueId + '/comments', {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
                     }, function (error) {
@@ -54,7 +55,7 @@ angular.module('services.issueService', [])
 
             function addIssuesComment(issueId, comment) {
                 var defer = $q.defer();
-                $http.post(baseUrl + issueId + '/comments', comment,
+                $http.post(serviceUrl + issueId + '/comments', comment,
                     {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
@@ -66,7 +67,19 @@ angular.module('services.issueService', [])
 
             function updateIssue(issueId, issue) {
                 var defer = $q.defer();
-                $http.put(baseUrl + issueId, issue, {headers: {'Authorization': sessionStorage.headers}})
+                $http.put(serviceUrl + issueId, issue, {headers: {'Authorization': sessionStorage.headers}})
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
+            function changeIssueStatus(issueId, newStatus) {
+                var defer = $q.defer();
+                var url = serviceUrl + issueId + '/changestatus?statusid=' + newStatus;
+                $http.put(url, {}, {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
                         defer.resolve(respond.data);
                     }, function (error) {
@@ -81,6 +94,7 @@ angular.module('services.issueService', [])
                 getIssueComments: getIssueComments,
                 addIssuesComment: addIssuesComment,
                 addIssue: addIssue,
-                updateIssue: updateIssue
+                updateIssue: updateIssue,
+                changeIssueStatus: changeIssueStatus
             };
         }]);

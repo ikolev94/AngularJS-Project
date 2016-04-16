@@ -17,6 +17,14 @@ angular.module('issueTrackerSystem.issue', ['services.issueService'])
                     $scope.inCommentMode = !$scope.inCommentMode;
                 };
 
+                $scope.updateStatus = function (statusId, statusName) {
+                    issueService.changeIssueStatus(issueId, statusId)
+                        .then(function (newAvailableStatuses) {
+                            $scope.issue.Status.Name = statusName;
+                            $scope.issue.AvailableStatuses = newAvailableStatuses;
+                        })
+                };
+
                 $scope.postComment = function (comment) {
                     issueService.addIssuesComment(issueId, comment)
                         .then(function (respond) {

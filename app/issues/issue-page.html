@@ -7,16 +7,20 @@
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/issues/{{issue.Id}}/edit">Edit Issue</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/issues/{{issue.Id}}/edit">Edit
+                            Issue</a></li>
                         <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                        <li role="presentation" class="change-status"><a role="menuitem" tabindex="-1" href>Change issue
+                            status</a></li>
+                        <li role="presentation" ng-click="updateStatus(status.Id,status.Name)"
+                            ng-repeat="status in issue.AvailableStatuses">
+                            <a role="menuitem" tabindex="-1" href>{{status.Name}}</a>
+                        </li>
                     </ul>
                 </div>
                 <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
-                               <h2 class="text-center">{{issue.Title}}</h2>
+                    <h2 class="text-center">{{issue.Title}}</h2>
                     <h4 class="text-muted"><span>Due date</span> : <span>{{issue.DueDate|date}}</span></h4>
                     <h5 class="text-muted">Assignee : {{issue.Assignee.Username}}</h5>
                 </div>
