@@ -10,9 +10,6 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#/projects/{{project.Id}}/edit">Edit
                             Project</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
                     </ul>
                 </div>
                 <div class="panel-heading">
@@ -34,15 +31,16 @@
                 <div add-issue></div>
                 <h2 class="text-center">Project issues</h2>
                 <label for="filterIssues">Filter by:</label>
-                <select id="filterIssues" ng-model="issueFilter" class="form-control">
-                    <option selected="selected" value="{{nameU}}">My issues</option>
+                <select id="filterIssues" ng-change="changeFilterCriteria(criteria)" ng-model="criteria"
+                        class="form-control">
+                    <option selected="selected" value="My issues">My issues</option>
                     <option value="Open">Open</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="">All issues</option>
+                    <option value="Closed">Closed</option>
+                    <option value="All">All issues</option>
                 </select>
                 <table class="container table table-striped table-condensed">
                     <tbody>
-                    <tr ng-repeat="issue in issues|filter:issueFilter">
+                    <tr ng-repeat="issue in issues">
                         <td style="vertical-align: middle" class="text-center"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>
                         <td style="vertical-align: middle">{{issue.DueDate|date}}</td>

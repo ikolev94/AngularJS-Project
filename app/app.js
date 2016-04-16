@@ -24,12 +24,12 @@ angular.module('issueTrackerSystem', [
                 templateUrl: 'projects/all-projects-page.html',
                 controller: 'ProjectsCtrl',
                 resolve: {
-                    isLogged: function ($location) {
-                        if (!sessionStorage.access_token) {
+                    isLogged: ['$location', function ($location) {
+                        if (!sessionStorage.userName) {
                             console.log('resolve');
                             $location.path('/');
                         }
-                    }
+                    }]
                 }
             })
             .when('/', {
