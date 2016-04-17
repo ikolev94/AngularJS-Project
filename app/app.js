@@ -35,11 +35,17 @@
                 })
                 .when('/dashboard', {
                     templateUrl: 'dashboard-page/dashboard.html',
-                    controller: 'DashboardCtrl'
+                    controller: 'DashboardCtrl',
+                    resolve: {
+                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                    }
                 })
                 .when('/projects/:id', {
                     templateUrl: 'project-page/project-page.html',
-                    controller: 'ProjectCtrl'
+                    controller: 'ProjectCtrl',
+                    resolve: {
+                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                    }
                 })
                 .when('/issues/:id', {
                     templateUrl: 'issue-page/issue-page.html',

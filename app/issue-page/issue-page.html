@@ -7,9 +7,6 @@
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </span>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/issues/{{issue.Id}}/edit">Edit
-                            Issue</a></li>
-                        <li role="presentation" class="divider"></li>
                         <li role="presentation" class="change-status"><a role="menuitem" tabindex="-1" href>Change issue
                             status</a></li>
                         <li role="presentation" ng-click="updateStatus(status.Id,status.Name)"
@@ -21,8 +18,8 @@
                 <h4><span class="label label-info">{{issue.Status.Name}}</span></h4>
                 <div class="panel-heading">
                     <h2 class="text-center">{{issue.Title}}</h2>
-                    <h4 class="text-muted"><span>Due date</span> : <span>{{issue.DueDate|date}}</span></h4>
-                    <h5 class="text-muted">Assignee : {{issue.Assignee.Username}}</h5>
+                    <h4 class="text-muted"><span class="glyphicon glyphicon-calendar"></span> <span>{{issue.DueDate|date}}</span></h4>
+                    <h4 class="text-muted"> <span class="glyphicon glyphicon-user"></span> {{issue.Assignee.Username}}</h4>
                 </div>
                 <div class="panel-body">
                     <h4>{{issue.Description}}</h4>

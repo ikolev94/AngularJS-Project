@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-default panel-google-plus">
-                <div class="dropdown">
+                <div class="dropdown" ng-if="userPermission">
                     <span class="dropdown-toggle" type="button" data-toggle="dropdown">
                         <h4><span class="glyphicon glyphicon-chevron-down"></span></h4>
                     </span>
@@ -23,12 +23,12 @@
                     <span class="glyphicon glyphicon-tag"></span>
                     <span ng-repeat="label in project.Labels">&nbsp;{{label.Name}}&nbsp;</span>
                 </div>
-                <div class="center">
+                <div class="center" ng-if="userPermission">
                     <button data-toggle="modal" data-target="#squarespaceModal"
                             class="btn btn-primary center-block" ng-click="getUsers();getProjects()">Add a issue...
                     </button>
+                    <div add-issue></div>
                 </div>
-                <div add-issue></div>
                 <h2 class="text-center">Project issues</h2>
                 <label for="filterIssues">Filter by:</label>
                 <select id="filterIssues" ng-change="changeFilterCriteria(criteria)" ng-model="criteria"
@@ -47,6 +47,7 @@
                         <td><h4><span class="label" ng-class="{'label-info':issue.Priority.Id > 3,'label-danger':issue.Priority.Id === 3,
                     'label-warning':issue.Priority.Id === 2,'label-primary':issue.Priority.Id === 1,}">{{issue.Priority.Name}}</span>
                         </h4></td>
+                        <td ng-if="userPermission" ><a href="#/issues/{{issue.Id}}/edit"><h4><span class="glyphicon glyphicon-pencil"></span></h4></a> </td>
                     </tr>
                     </tbody>
                 </table>

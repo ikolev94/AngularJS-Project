@@ -7,7 +7,8 @@ angular.module('issueTrackerSystem.project', ['services.projectService'])
             '$scope',
             '$routeParams',
             'projectService',
-            function ($scope, $routeParams, projectService) {
+            'user',
+            function ($scope, $routeParams, projectService, user) {
 
                 $scope.criteria = 'All';
                 $scope.changeFilterCriteria = function (criteria) {
@@ -26,15 +27,15 @@ angular.module('issueTrackerSystem.project', ['services.projectService'])
                     }
                     if (criteria === 'My issues') {
                         $scope.issues = $scope.allIssues.filter(function (issue) {
-                            return issue.Assignee.Username === sessionStorage.userName;
+                            return issue.Assignee.Username === user.Username;
                         })
                     }
                 };
 
-                // $scope.nameU = sessionStorage['userName'];
                 projectService.getProjectById($routeParams.id)
                     .then(function (projectData) {
                         $scope.project = projectData;
+                        $scope.userPermission = projectData.Lead.Username === user.Username || user.isAdmin;
                         projectService.getProjectIssues($routeParams.id)
                             .then(function (issuesData) {
                                 $scope.allIssues = issuesData;

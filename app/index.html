@@ -20,7 +20,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 </head>
-<body>
+<body ng-cloak>
 <div style="margin-bottom: 90px"></div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -67,6 +67,7 @@
 <script src="common/users-service.js"></script>
 <script src="common/label-service.js"></script>
 <script src="common/typeahead-directive.js"></script>
+<script src="common/issue-service.js"></script>
 <script src="users/user-access-directive.js"></script>
 <script src="users/user-access-controller.js"></script>
 <script src="users/authentication.js"></script>
@@ -76,10 +77,9 @@
 <script src="dashboard-page/dashboard-controller.js"></script>
 <script src="issue-page/issue-controller.js"></script>
 <script src="project-page/project-controller.js"></script>
-<script src="issue-page/issue-service.js"></script>
 <script src="add-issue-page/add-issue-directive.js"></script>
-<script src="add-project-page/add-project-directive.js"></script>
 <script src="add-issue-page/add-issue-controller.js"></script>
+<script src="add-project-page/add-project-directive.js"></script>
 <script src="add-project-page/add-project-controller.js"></script>
 <script src="all-projects-page/projects-controller.js"></script>
 <script src="edit-project-page/edit-project-controller.js"></script>
