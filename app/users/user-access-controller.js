@@ -56,7 +56,7 @@ angular.module('issueTrackerSystem.users', [
                         authentication.login(user)
                             .then(function (userData) {
                                 notification.success('Welcome ' + userData.userName);
-                                $location.path('/dashboard');
+                                $location.path('/dashboard-page');
                             }, function (errorMsg) {
                                 notification.error(errorMsg);
                             });

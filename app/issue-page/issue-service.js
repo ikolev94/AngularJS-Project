@@ -24,7 +24,7 @@ angular.module('services.issueService', [])
                 var defer = $q.defer();
                 $http.post(serviceUrl, issue, {headers: {'Authorization': sessionStorage.headers}})
                     .then(function (respond) {
-                        defer.resolve(respond)
+                        defer.resolve(respond.data)
                     }, function (error) {
                         defer.reject(error.Message)
                     });

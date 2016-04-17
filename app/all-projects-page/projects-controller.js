@@ -8,10 +8,11 @@
             [
                 '$scope',
                 'projectService',
-                function ($scope, projectService) {
-
+                'currentUser',
+                'user',
+                function ($scope, projectService, currentUser, user) {
                     $scope.checkCurrentUsername = function (name) {
-                        return sessionStorage.userName === name;
+                        return user.Username === name;
                     };
 
                     var ISSUES_PER_PAGE = 10;

@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module('issueTrackerSystem.users.authentication', [])
-    .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies',
-        function ($http, $q, BASE_URL, identity, $cookies) {
+    .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies', 'currentUser',
+        function ($http, $q, BASE_URL, identity, $cookies, currentUser) {
 
             function register(user) {
                 var defer = $q.defer();
@@ -24,22 +24,39 @@ angular.module('issueTrackerSystem.users.authentication', [])
                         var tokenValue = success.data.access_token;
 
                         sessionStorage.headers = 'Bearer ' + tokenValue;
-                        sessionStorage.userName = success.data.userName;
+                        // sessionStorage.userName = success.data.userName;
 
                         $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
                         $http.defaults.headers.common.Authorization = 'Bearer ' + tokenValue;
 
-                        $http.get(BASE_URL + 'users/me')
-                            .success(function (identityResponse) {
-                                sessionStorage.userId = identityResponse.Id;
-                                sessionStorage.isAdmin = identityResponse.isAdmin;
-                                identity.setUser(identityResponse);
-                                defer.resolve(success.data);
-                            })
+                        getIdentity().then(function (userInfo) {
+                            currentUser.Id = userInfo.Id;
+                            currentUser.isAdmin = userInfo.isAdmin;
+                            currentUser.Username = userInfo.Username;
+                            defer.resolve(success.data);
+                        });
+                        // $http.get(BASE_URL + 'users/me')
+                        //     .success(function (identityResponse) {
+                        //         sessionStorage.userId = identityResponse.Id;
+                        //         sessionStorage.isAdmin = identityResponse.isAdmin;
+                        //         identity.setUser(identityResponse);
+
+                        //     })
 
 
                     }, function (error) {
                         defer.reject(error.data.error_description || error.data.message);
+                    });
+                return defer.promise;
+            }
+
+            function getIdentity() {
+                var defer = $q.defer();
+                $http.get(BASE_URL + 'users/me', {headers: {'Authorization': sessionStorage.headers}})
+                    .then(function (identityResponse) {
+                        defer.resolve(identityResponse.data)
+                    }, function (error) {
+                        defer.reject(error)
                     });
                 return defer.promise;
             }
@@ -53,6 +70,7 @@ angular.module('issueTrackerSystem.users.authentication', [])
             return {
                 register: register,
                 login: login,
-                logout: logout
+                logout: logout,
+                getIdentity: getIdentity
             }
         }]);
