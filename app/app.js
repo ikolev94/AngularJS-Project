@@ -49,7 +49,10 @@
                 })
                 .when('/issues/:id', {
                     templateUrl: 'issue-page/issue-page.html',
-                    controller: 'IssueCtrl'
+                    controller: 'IssueCtrl',
+                    resolve: {
+                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                    }
                 })
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',

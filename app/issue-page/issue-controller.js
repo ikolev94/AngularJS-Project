@@ -9,7 +9,8 @@ angular.module('issueTrackerSystem.issue', ['services.issueService'])
             'notification',
             'authentication',
             'issueService',
-            function ($scope, $routeParams, notification, authentication, issueService) {
+            'user',
+            function ($scope, $routeParams, notification, authentication, issueService, user) {
                 var issueId = $routeParams.id;
 
                 $scope.inCommentMode = false;
@@ -37,6 +38,8 @@ angular.module('issueTrackerSystem.issue', ['services.issueService'])
                 issueService.getIssueById(issueId)
                     .then(function (issueData) {
                         $scope.issue = issueData;
+                        $scope.hasPermissionToAddComments = issueData.Author.Id === user.Id ||
+                            issueData.Assignee.Id === user.Id;
                         issueService.getIssueComments(issueId)
                             .then(function (commentsData) {
                                 $scope.comments = commentsData;
