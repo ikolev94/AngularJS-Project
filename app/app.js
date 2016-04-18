@@ -26,7 +26,12 @@
                     templateUrl: 'all-projects-page/all-projects-page.html',
                     controller: 'ProjectsCtrl',
                     resolve: {
-                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                        user: userAccessCheck,
+                        admin: ['currentUser', '$location', function (currentUser, $location) {
+                            if (!currentUser.isAdmin) {
+                                $location.path('/');
+                            }
+                        }]
                     }
                 })
                 .when('/', {
@@ -37,77 +42,81 @@
                     templateUrl: 'dashboard-page/dashboard.html',
                     controller: 'DashboardCtrl',
                     resolve: {
-                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                        user: userAccessCheck
                     }
                 })
                 .when('/projects/:id', {
                     templateUrl: 'project-page/project-page.html',
                     controller: 'ProjectCtrl',
                     resolve: {
-                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                        user: userAccessCheck
                     }
                 })
                 .when('/issues/:id', {
                     templateUrl: 'issue-page/issue-page.html',
                     controller: 'IssueCtrl',
                     resolve: {
-                        user: ['currentUser', 'authentication', '$q', '$location', userAccessCheck]
+                        user: userAccessCheck
                     }
                 })
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',
                     controller: 'ProfileCtrl',
-                    access: {login: true}
+                    resolve: {
+                        user: userAccessCheck
+                    }
                 })
                 .when('/profile/password', {
                     templateUrl: 'profile/edit-password.html',
                     controller: 'PasswordCtrl',
-                    access: {login: true}
+                    resolve: {
+                        user: userAccessCheck
+                    }
                 })
                 .when('/projects/:id/edit', {
                     templateUrl: 'edit-project-page/edit-project-page.html',
                     controller: 'EditProjectCtrl',
-                    access: {admin: true}
+                    resolve: {
+                        user: userAccessCheck
+                    }
                 })
                 .when('/issues/:id/edit', {
                     templateUrl: 'edit-issue-page/edit-issue-page.html',
                     controller: 'EditIssueCtrl',
-                    access: {login: true}
+                    resolve: {
+                        user: userAccessCheck
+                    }
                 })
-                .otherwise({redirectTo: '/dashboard'});
+                .otherwise({redirectTo: '/'});
         }])
-        .run(function ($rootScope, $location, $route) {
-
+        .run(function ($rootScope, $location) {
             $rootScope.$on('$routeChangeStart', function (event, next, current) {
-                console.log(event);
-                console.log(next);
-                console.log(current);
+                if (!sessionStorage.headers) {
+                    $location.path('/');
+                }
             });
         });
 
-    var userAccessCheck = function (currentUser, authentication, $q, $location) {
-        if (!sessionStorage.headers) {
-            $location.path('/');
-            console.log('no sesion');
-            return false;
-        }
-        if (sessionStorage.headers && !currentUser.Username) {
-            var defer = $q.defer();
-            authentication.getIdentity()
-                .then(function (userInfo) {
-                    currentUser.Id = userInfo.Id;
-                    currentUser.isAdmin = userInfo.isAdmin;
-                    currentUser.Username = userInfo.Username;
-                    defer.resolve(userInfo);
-                    console.log('get user');
-                }, function (error) {
-                    defer.reject(error);
-                    console.log('fake headers');
-                    $location.path('/');
-                });
-            return defer.promise;
-        }
-        console.log('have user');
-        return currentUser;
-    };
+    var userAccessCheck = ['currentUser', 'authentication', '$q', '$location',
+        function (currentUser, authentication, $q, $location) {
+            if (Object.keys(currentUser).length === 0) {
+                var defer = $q.defer();
+                authentication.getIdentity()
+                    .then(function (userInfo) {
+                        currentUser.Id = userInfo.Id;
+                        currentUser.isAdmin = userInfo.isAdmin;
+                        currentUser.Username = userInfo.Username;
+                        defer.resolve(userInfo);
+                        console.log('get user');
+                    }, function (error) {
+                        defer.reject(error);
+                        console.log('fake headers');
+                        $location.path('/');
+                    });
+                return defer.promise;
+            } else {
+                console.log('have user');
+                return currentUser;
+            }
+        }];
 }());

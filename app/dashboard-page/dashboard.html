@@ -32,5 +32,24 @@
                             num-pages="smallnumPages"></uib-pagination>
         </div>
         <div add-project></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-center">Projects</h1>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <ul class="text-center list-group">
+                        <a href="#/projects/{{project.Id}}" ng-repeat="project in projects"
+                           class="list-group-item">{{project.Name}}</a>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <uib-pagination direction-links="false" ng-change="pageChanged2()" total-items="totalItems2"
+                                    ng-model="currentPage2" boundary-link-numbers="true" max-size="7"
+                                    num-pages="smallnumPages"></uib-pagination>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

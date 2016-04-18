@@ -40,6 +40,18 @@ angular.module('services.projectService', [])
                 return defer.promise;
             }
 
+            function getUserProjects(pageNumber, name) {
+                var defer = $q.defer();
+                $http.get(baseUrl + '?pageSize=10&pageNumber=' + pageNumber + '&filter=Lead.Username=="' + name + '"',
+                    {headers: {'Authorization': sessionStorage.headers}})
+                    .then(function (respond) {
+                        defer.resolve(respond.data);
+                    }, function (error) {
+                        defer.reject(error.data.message)
+                    });
+                return defer.promise;
+            }
+
             function addProject(project) {
                 var defer = $q.defer();
                 $http.post(baseUrl, project, {headers: {'Authorization': sessionStorage.headers}})
@@ -67,6 +79,7 @@ angular.module('services.projectService', [])
                 getProjectIssues: getProjectIssues,
                 getAllProjects: getAllProjects,
                 addProject: addProject,
-                updateProject: updateProject
+                updateProject: updateProject,
+                getUserProjects: getUserProjects
             };
         }]);

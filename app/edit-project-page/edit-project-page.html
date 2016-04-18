@@ -20,7 +20,7 @@
                         <textarea id="InputDescription" class="form-control" ng-model="newProject.Description"
                                   placeholder="..." rows="3" required="required"></textarea>
                 </div>
-                <div class="form-group">
+                <div ng-if="user.isAdmin" class="form-group">
                     <label for="InputAssigned">Leader</label>
                     <select id="InputAssigned" required="required" ng-model="newProject.LeadId"
                             class="form-control"

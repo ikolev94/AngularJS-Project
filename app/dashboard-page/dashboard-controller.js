@@ -8,10 +8,12 @@
             'authentication',
             'issueService',
             'user',
-            function ($scope, authentication, issueService, user) {
+            'projectService',
+            function ($scope, authentication, issueService, user, projectService) {
                 var ISSUES_PER_PAGE = 10;
 
                 $scope.currentPage = 1;
+                $scope.currentPage2 = 1;
 
                 $scope.isAdmin = user.isAdmin;
 
@@ -23,11 +25,25 @@
                         })
                 }
 
+                function getMyProjects() {
+                    projectService.getUserProjects($scope.currentPage2, user.Username)
+                        .then(function (p) {
+                            $scope.totalItems2 = p.TotalPages * ISSUES_PER_PAGE;
+                            $scope.projects = p.Projects;
+                        });
+                }
+
                 $scope.pageChanged = function () {
                     getMyIssues();
                 };
 
+                $scope.pageChanged2 = function () {
+                    getMyProjects();
+                };
+
+                getMyProjects();
                 getMyIssues();
+
 
             }]);
 }());

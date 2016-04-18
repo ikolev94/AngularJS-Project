@@ -13,9 +13,10 @@ angular.module('issueTrackerSystem.editProjectController', [
             'projectService',
             'notification',
             'labelService',
-            function ($scope, $routeParams, $location, usersService, projectService, notification, labelService) {
-                $scope.issueFilter = sessionStorage['userName'];
-                $scope.nameU = sessionStorage['userName'];
+            'user',
+            function ($scope, $routeParams, $location, usersService, projectService, notification, labelService, user) {
+
+                $scope.user = user;
                 projectService.getProjectById($routeParams.id)
                     .then(function (projectData) {
                         $scope.newProject = projectData;
