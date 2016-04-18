@@ -22,7 +22,7 @@
         .value('currentUser', {})
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
-                .when('/projects/', {
+                .when('/projects', {
                     templateUrl: 'all-projects-page/all-projects-page.html',
                     controller: 'ProjectsCtrl',
                     resolve: {
@@ -56,22 +56,34 @@
                 })
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',
-                    controller: 'ProfileCtrl'
+                    controller: 'ProfileCtrl',
+                    access: {login: true}
                 })
                 .when('/profile/password', {
                     templateUrl: 'profile/edit-password.html',
-                    controller: 'PasswordCtrl'
+                    controller: 'PasswordCtrl',
+                    access: {login: true}
                 })
                 .when('/projects/:id/edit', {
                     templateUrl: 'edit-project-page/edit-project-page.html',
-                    controller: 'EditProjectCtrl'
+                    controller: 'EditProjectCtrl',
+                    access: {admin: true}
                 })
                 .when('/issues/:id/edit', {
                     templateUrl: 'edit-issue-page/edit-issue-page.html',
-                    controller: 'EditIssueCtrl'
+                    controller: 'EditIssueCtrl',
+                    access: {login: true}
                 })
                 .otherwise({redirectTo: '/dashboard'});
-        }]);
+        }])
+        .run(function ($rootScope, $location, $route) {
+
+            $rootScope.$on('$routeChangeStart', function (event, next, current) {
+                console.log(event);
+                console.log(next);
+                console.log(current);
+            });
+        });
 
     var userAccessCheck = function (currentUser, authentication, $q, $location) {
         if (!sessionStorage.headers) {
@@ -97,5 +109,5 @@
         }
         console.log('have user');
         return currentUser;
-    };    
+    };
 }());
