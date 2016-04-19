@@ -17,8 +17,8 @@
 
                     var ISSUES_PER_PAGE = 10;
 
-                    $scope.pageChanged = function () {
-                        var toSkip = ($scope.currentPage - 1) * ISSUES_PER_PAGE;
+                    $scope.pageChanged = function (page) {
+                        var toSkip = ( (page || 1) - 1) * ISSUES_PER_PAGE;
                         $scope.projects = $scope.allProjects.slice(toSkip, toSkip + ISSUES_PER_PAGE)
                     };
 

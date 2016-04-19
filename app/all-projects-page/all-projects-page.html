@@ -14,8 +14,11 @@
         </div>
     </div>
     <div class="text-center">
-        <uib-pagination direction-links="false" ng-change="pageChanged()" total-items="totalItems"
-                        ng-model="currentPage" boundary-link-numbers="true" max-size="7" num-pages="smallnumPages">
-        </uib-pagination>
+        <div paging
+             page="currentPage"
+             page-size="10"
+             total="totalItems"
+             paging-action="pageChanged(page)">
+        </div>
     </div>
 </div>

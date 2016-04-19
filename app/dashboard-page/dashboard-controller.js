@@ -13,32 +13,32 @@
                 var ISSUES_PER_PAGE = 10;
 
                 $scope.currentPage = 1;
-                $scope.currentPage2 = 1;
+                $scope.currentProjectsPage = 1;
 
                 $scope.isAdmin = user.isAdmin;
 
-                function getMyIssues() {
-                    issueService.getMyIssuesSortByDescDueDate($scope.currentPage)
+                function getMyIssues(page) {
+                    issueService.getMyIssuesSortByDescDueDate(page || 1)
                         .then(function (response) {
                             $scope.totalItems = response.TotalPages * ISSUES_PER_PAGE;
                             $scope.issues = response.Issues;
                         })
                 }
 
-                function getMyProjects() {
-                    projectService.getUserProjects($scope.currentPage2, user.Username)
+                function getMyProjects(page) {
+                    projectService.getUserProjects(page || 1, user.Username)
                         .then(function (p) {
-                            $scope.totalItems2 = p.TotalPages * ISSUES_PER_PAGE;
+                            $scope.totalProjects = p.TotalPages * ISSUES_PER_PAGE;
                             $scope.projects = p.Projects;
                         });
                 }
 
-                $scope.pageChanged = function () {
-                    getMyIssues();
+                $scope.pageChanged = function (page) {
+                    getMyIssues(page);
                 };
 
-                $scope.pageChanged2 = function () {
-                    getMyProjects();
+                $scope.projectsPageChanged = function (page) {
+                    getMyProjects(page);
                 };
 
                 getMyProjects();

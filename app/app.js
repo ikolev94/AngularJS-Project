@@ -5,7 +5,7 @@
             'ngRoute',
             'ngCookies',
             'angular-loading-bar',
-            'ui.bootstrap',
+            'bw.paging',
             'issueTrackerSystem.notification',
             'issueTrackerSystem.users',
             'issueTrackerSystem.users.profile',
