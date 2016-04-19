@@ -33,15 +33,15 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <div menu class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-                <li>
+                <li class="for-user for-admin">
                     <a href="#/dashboard">Dashboard</a>
                 </li>
-                <li>
+                <li class="for-admin">
                     <a href="#/projects">Projects </a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown for-user for-admin">
                     <a class="dropdown-toggle" data-toggle="dropdown" href id="download">Profile <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="download">
@@ -51,8 +51,11 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li class="for-gust">
                     <a href="#/">Login</a>
+                </li>
+                <li ng-controller="UserCtrl" ng-click="logout()" class="for-user for-admin">
+                    <a href="#/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -69,6 +72,7 @@
 <script src="common/label-service.js"></script>
 <script src="common/typeahead-directive.js"></script>
 <script src="common/issue-service.js"></script>
+<script src="common/menu-directive.js"></script>
 <script src="users/user-access-directive.js"></script>
 <script src="users/user-access-controller.js"></script>
 <script src="users/authentication.js"></script>

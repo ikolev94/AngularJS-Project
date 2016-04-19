@@ -87,18 +87,23 @@
                         user: userAccessCheck
                     }
                 })
+                .when('/logout', {
+                    controller: 'UserCtrl',
+                    redirectTo: '/'
+                })
                 .otherwise({redirectTo: '/dashboard'});
         }])
         .run(function ($rootScope, $location) {
-            $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            $rootScope.$on('$routeChangeStart', function () {
                 if (!sessionStorage.headers) {
+                    $rootScope.$broadcast('guest-event');
                     $location.path('/');
                 }
             });
         });
 
-    var userAccessCheck = ['currentUser', 'authentication', '$q', '$location',
-        function (currentUser, authentication, $q, $location) {
+    var userAccessCheck = ['currentUser', 'authentication', '$q', '$location', '$rootScope',
+        function (currentUser, authentication, $q, $location, $rootScope) {
             if (Object.keys(currentUser).length === 0) {
                 var defer = $q.defer();
                 authentication.getIdentity()
@@ -107,15 +112,17 @@
                         currentUser.isAdmin = userInfo.isAdmin;
                         currentUser.Username = userInfo.Username;
                         defer.resolve(userInfo);
+                        $rootScope.$broadcast('myEvent', currentUser);
                         console.log('get user');
                     }, function (error) {
                         defer.reject(error);
-                        console.log('fake headers');
+                        $rootScope.$broadcast('guest-event');
                         $location.path('/');
                     });
                 return defer.promise;
             } else {
                 console.log('have user');
+                $rootScope.$broadcast('myEvent', currentUser);
                 return currentUser;
             }
         }];

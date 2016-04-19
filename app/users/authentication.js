@@ -58,6 +58,7 @@
                     $cookies.remove();
                     $http.defaults.headers.common.Authorization = null;
                     identity.removeUser();
+                    sessionStorage.clear();
                 }
 
                 return {
@@ -66,5 +67,5 @@
                     logout: logout,
                     getIdentity: getIdentity
                 }
-            }]);    
+            }]);
 }());
