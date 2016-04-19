@@ -12,6 +12,14 @@
                         $scope.users = allUsers;
                     });
 
+                $scope.updateProjectKey = function () {
+                    $scope.newProject.ProjectKey = $scope.newProject.Name.split(/\s+/)
+                        .map(function (word) {
+                            return word[0].toUpperCase();
+                        })
+                        .join('');
+                };
+
                 $scope.addProject = function (projectToAdd) {
                     projectToAdd.Priorities = [];
                     projectToAdd.inputPriorities.split(/[\s+|,]+/).forEach(function (p) {

@@ -20,6 +20,10 @@
                     $scope.user = user;
                     projectService.getProjectById($routeParams.id)
                         .then(function (projectData) {
+                            if (!(user.isAdmin || user.Username === projectData.Lead.Username)) {
+                                $location.path('/');
+                                return false;
+                            }
                             $scope.newProject = projectData;
                             $scope.inputLabels = labelService.labelsToString(projectData);
                             $scope.newProject.Priorities = $scope.newProject.Priorities.map(function (el) {

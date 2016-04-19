@@ -1,6 +1,6 @@
 <label for="labels">Labels</label>
 <input class="form-control" type="text" ng-model="model" ng-change="onItemChange(model)" placeholder="{{prompt}}"
-      id="labels" ng-keydown="selected=false"/><br/>
+      id="labels" autocomplete="off" ng-keydown="selected=false"/><br/>
 <div class="items" ng-hide="!model.length || selected">
     <div class="item" ng-repeat="item in items track by $index" ng-click="handleSelection(item[title])"
          style="cursor:pointer" ng-class="{activeLabel:isCurrent($index)}" ng-mouseenter="setCurrent($index)">

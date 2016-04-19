@@ -6,10 +6,14 @@
             return {
                 restrict: 'A',
                 link: function (scope) {
-                    var isAdmin;
-                    scope.$on('myEvent', function (e, data) {
+                    
+                    if (!sessionStorage.length) {
+                        $('.for-admin, .for-user').hide();
+                    }
+
+                    scope.$on('user-event', function (e, data) {
                         $('.for-gust').hide();
-                        if (data.isAdmin && !isAdmin) {
+                        if (data.isAdmin) {
                             $('.for-admin').show();
                         } else {
                             $('.for-user').show();

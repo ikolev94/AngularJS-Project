@@ -20,19 +20,15 @@
             'issueTrackerSystem.editProjectController'])
         .constant("BASE_URL", 'http://softuni-issue-tracker.azurewebsites.net/')
         .value('currentUser', {})
-        .config(['$routeProvider', function ($routeProvider) {
+        .config(['$routeProvider', 'routeResolversProvider', function ($routeProvider, routeResolversProvider) {
+
+            var routeResolveChecks = routeResolversProvider.$get();
+
             $routeProvider
                 .when('/projects', {
                     templateUrl: 'all-projects-page/all-projects-page.html',
                     controller: 'ProjectsCtrl',
-                    resolve: {
-                        user: userAccessCheck,
-                        admin: ['currentUser', '$location', function (currentUser, $location) {
-                            if (!currentUser.isAdmin) {
-                                $location.path('/');
-                            }
-                        }]
-                    }
+                    resolve: routeResolveChecks.admin
                 })
                 .when('/', {
                     templateUrl: 'users/users.html',
@@ -41,9 +37,7 @@
                 .when('/dashboard', {
                     templateUrl: 'dashboard-page/dashboard.html',
                     controller: 'DashboardCtrl',
-                    resolve: {
-                        user: userAccessCheck
-                    }
+                    resolve: routeResolveChecks.user
                 })
                 .when('/projects/:id', {
                     templateUrl: 'project-page/project-page.html',
@@ -62,9 +56,7 @@
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',
                     controller: 'ProfileCtrl',
-                    resolve: {
-                        user: userAccessCheck
-                    }
+                    resolve: routeResolveChecks.user
                 })
                 .when('/profile/password', {
                     templateUrl: 'profile/edit-password.html',
@@ -76,9 +68,7 @@
                 .when('/projects/:id/edit', {
                     templateUrl: 'edit-project-page/edit-project-page.html',
                     controller: 'EditProjectCtrl',
-                    resolve: {
-                        user: userAccessCheck
-                    }
+                    resolve: routeResolveChecks.user
                 })
                 .when('/issues/:id/edit', {
                     templateUrl: 'edit-issue-page/edit-issue-page.html',

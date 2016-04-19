@@ -5,9 +5,8 @@ angular.module('issueTrackerSystem.users.profile', ['issueTrackerSystem.users.id
         [
             '$scope',
             'notification',
-            'identity',
-            '$location',
-            function ($scope, notification, identity) {
+            'user',
+            function ($scope, notification, user) {
 
                 function validateUserData(user) {
                     if (typeof user.name !== 'string') {
@@ -24,11 +23,8 @@ angular.module('issueTrackerSystem.users.profile', ['issueTrackerSystem.users.id
                 $scope.checkGender = function (genderToCheck) {
                     return $scope.user ? genderToCheck === $scope.user.gender : false;
                 };
-
-
-                    // .then(function (userData) {
-                        $scope.user = identity.getUser();
-                    // });
+                
+                $scope.user = user;
 
                 $scope.editProfile = function (user) {
                     // if (validateUserData(user)) {
