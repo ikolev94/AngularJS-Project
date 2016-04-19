@@ -87,7 +87,7 @@
                         user: userAccessCheck
                     }
                 })
-                .otherwise({redirectTo: '/'});
+                .otherwise({redirectTo: '/dashboard'});
         }])
         .run(function ($rootScope, $location) {
             $rootScope.$on('$routeChangeStart', function (event, next, current) {

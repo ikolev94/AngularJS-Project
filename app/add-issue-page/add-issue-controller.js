@@ -43,6 +43,7 @@ angular.module('addIssueController', [
                 $scope.addIssue = function (newIssue) {
                     issueService.addIssue(newIssue)
                         .then(function (success) {
+                            $scope.allIssues.push(success);
                             notification.success('New issue added')
                         }, function (error) {
                             console.log(error);

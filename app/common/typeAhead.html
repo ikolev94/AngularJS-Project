@@ -5,6 +5,5 @@
     <div class="item" ng-repeat="item in items track by $index" ng-click="handleSelection(item[title])"
          style="cursor:pointer" ng-class="{activeLabel:isCurrent($index)}" ng-mouseenter="setCurrent($index)">
         <p class="title">{{item[title]}}</p>
-        <p class="subtitle">{{item[subtitle]}}</p>
     </div>
 </div>
