@@ -47,7 +47,8 @@
                         <td><h4><span class="label" ng-class="{'label-info':issue.Priority.Id > 3,'label-danger':issue.Priority.Id === 3,
                     'label-warning':issue.Priority.Id === 2,'label-primary':issue.Priority.Id === 1,}">{{issue.Priority.Name}}</span>
                         </h4></td>
-                        <td ng-if="userPermission" ><a href="#/issues/{{issue.Id}}/edit"><h4><span class="glyphicon glyphicon-pencil"></span></h4></a> </td>
+                        <td ng-if="userPermission"><a href="#/issues/{{issue.Id}}/edit"><h4><span
+                                class="glyphicon glyphicon-pencil"></span></h4></a></td>
                     </tr>
                     </tbody>
                 </table>

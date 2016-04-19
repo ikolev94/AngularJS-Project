@@ -1,76 +1,70 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module('issueTrackerSystem.users.authentication', [])
-    .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies', 'currentUser',
-        function ($http, $q, BASE_URL, identity, $cookies, currentUser) {
+    angular.module('issueTrackerSystem.users.authentication', [])
+        .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies', 'currentUser',
+            function ($http, $q, BASE_URL, identity, $cookies, currentUser) {
 
-            function register(user) {
-                var defer = $q.defer();
-                $http.post(BASE_URL + 'api/Account/Register', user)
-                    .then(function (respond) {
-                        defer.resolve(respond.data);
-                    }, function (error) {
-                        defer.reject(error.data.message)
-                    });
-                return defer.promise;
-            }
-
-            function login(user) {
-                var defer = $q.defer();
-                user = "username=" + user.username + "&password=" + user.password +
-                    "&grant_type=password";
-                $http.post(BASE_URL + 'api/Token', user)
-                    .then(function (success) {
-                        var tokenValue = success.data.access_token;
-
-                        sessionStorage.headers = 'Bearer ' + tokenValue;
-                        // sessionStorage.userName = success.data.userName;
-
-                        $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + tokenValue;
-
-                        getIdentity().then(function (userInfo) {
-                            currentUser.Id = userInfo.Id;
-                            currentUser.isAdmin = userInfo.isAdmin;
-                            currentUser.Username = userInfo.Username;
-                            defer.resolve(success.data);
+                function register(user) {
+                    var defer = $q.defer();
+                    $http.post(BASE_URL + 'api/Account/Register', user)
+                        .then(function (respond) {
+                            defer.resolve(respond.data);
+                        }, function (error) {
+                            defer.reject(error.data.message)
                         });
-                        // $http.get(BASE_URL + 'users/me')
-                        //     .success(function (identityResponse) {
-                        //         sessionStorage.userId = identityResponse.Id;
-                        //         sessionStorage.isAdmin = identityResponse.isAdmin;
-                        //         identity.setUser(identityResponse);
+                    return defer.promise;
+                }
 
-                        //     })
+                function login(user) {
+                    var defer = $q.defer();
+                    user = "username=" + user.username + "&password=" + user.password +
+                        "&grant_type=password";
+                    $http.post(BASE_URL + 'api/Token', user)
+                        .then(function (success) {
+                            var tokenValue = success.data.access_token;
 
+                            sessionStorage.headers = 'Bearer ' + tokenValue;
+                            // sessionStorage.userName = success.data.userName;
 
-                    }, function (error) {
-                        defer.reject(error.data.error_description || error.data.message);
-                    });
-                return defer.promise;
-            }
+                            $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
+                            $http.defaults.headers.common.Authorization = 'Bearer ' + tokenValue;
 
-            function getIdentity() {
-                var defer = $q.defer();
-                $http.get(BASE_URL + 'users/me', {headers: {'Authorization': sessionStorage.headers}})
-                    .then(function (identityResponse) {
-                        defer.resolve(identityResponse.data)
-                    }, function (error) {
-                        defer.reject(error)
-                    });
-                return defer.promise;
-            }
+                            getIdentity().then(function (userInfo) {
+                                currentUser.Id = userInfo.Id;
+                                currentUser.isAdmin = userInfo.isAdmin;
+                                currentUser.Username = userInfo.Username;
+                                defer.resolve(success.data);
+                            });
 
-            function logout() {
-                $cookies.remove();
-                $http.defaults.headers.common.Authorization = null;
-                identity.removeUser();
-            }
+                        }, function (error) {
+                            defer.reject(error.data.error_description || error.data.message);
+                        });
+                    return defer.promise;
+                }
 
-            return {
-                register: register,
-                login: login,
-                logout: logout,
-                getIdentity: getIdentity
-            }
-        }]);
+                function getIdentity() {
+                    var defer = $q.defer();
+                    $http.get(BASE_URL + 'users/me', {headers: {'Authorization': sessionStorage.headers}})
+                        .then(function (identityResponse) {
+                            defer.resolve(identityResponse.data)
+                        }, function (error) {
+                            defer.reject(error)
+                        });
+                    return defer.promise;
+                }
+
+                function logout() {
+                    $cookies.remove();
+                    $http.defaults.headers.common.Authorization = null;
+                    identity.removeUser();
+                }
+
+                return {
+                    register: register,
+                    login: login,
+                    logout: logout,
+                    getIdentity: getIdentity
+                }
+            }]);    
+}());

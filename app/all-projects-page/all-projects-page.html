@@ -6,10 +6,20 @@
                 <div class="panel-heading">
                     <h3 class="panel-title"></h3>
                 </div>
-                <ul class="text-center list-group">
-                    <a href="#/projects/{{project.Id}}" ng-repeat="project in projects" class="list-group-item"
-                       ng-class="{activeProject:checkCurrentUsername(project.Lead.Username)}">{{project.Name}}</a>
-                </ul>
+                <table class="container table table-striped table-condensed">
+                    <tbody>
+                    <tr ng-repeat="project in projects">
+                        <td style="vertical-align: middle" class="text-center"><a href="#/projects/{{project.Id}}" class="list-group-item"
+                         ng-class="{activeProject:checkCurrentUsername(project.Lead.Username)}">{{project.Name}}</a>
+                        </td>
+                        <td>
+                            <a href="#/projects/{{project.Id}}/edit"><h4>
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </h4></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
