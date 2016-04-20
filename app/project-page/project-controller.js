@@ -11,7 +11,7 @@
                 'user',
                 function ($scope, $routeParams, projectService, user) {
 
-                    $scope.criteria = 'All';
+                    $scope.criteria = 'My issues';
                     $scope.changeFilterCriteria = function (criteria) {
                         if (criteria === 'All') {
                             $scope.issues = $scope.allIssues;
@@ -40,7 +40,7 @@
                             projectService.getProjectIssues($routeParams.id)
                                 .then(function (issuesData) {
                                     $scope.allIssues = issuesData;
-                                    $scope.issues = issuesData;
+                                    $scope.changeFilterCriteria('My issues');
                                 })
                         }, function (error) {
                             console.log(error);

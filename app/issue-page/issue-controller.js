@@ -13,7 +13,8 @@
                 'user',
                 function ($scope, $routeParams, notification, authentication, issueService, user) {
                     var issueId = $routeParams.id;
-
+                    
+                    $scope.user = user;
                     $scope.inCommentMode = false;
                     $scope.change = function () {
                         $scope.inCommentMode = !$scope.inCommentMode;

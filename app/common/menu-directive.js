@@ -16,6 +16,7 @@
                         if (data.isAdmin) {
                             $('.for-admin').show();
                         } else {
+                            $('.for-admin').hide();
                             $('.for-user').show();
                         }
                     });
