@@ -2,8 +2,27 @@
     "use strict";
 
     angular.module('issueTrackerSystem.users.authentication', [])
-        .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies', 'currentUser',
-            function ($http, $q, BASE_URL, identity, $cookies, currentUser) {
+        .factory('authentication', ['$http', '$q', 'BASE_URL', 'identity', '$cookies',
+            function ($http, $q, BASE_URL, identity, $cookies) {
+
+                var AUTHENTICATION_COOKIE_KEY = '__Authentication_Cookie_Key__';
+
+                function preserveUserData(data) {
+                    var accessToken = data.access_token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+                    $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
+                }
+
+                function isAuthenticated() {
+                    return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
+                }
+
+                function refreshCookie() {
+                    if (isAuthenticated()) {
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
+                        identity.requestUserProfile();
+                    }
+                }
 
                 function register(user) {
                     var defer = $q.defer();
@@ -22,40 +41,22 @@
                         "&grant_type=password";
                     $http.post(BASE_URL + 'api/Token', user)
                         .then(function (success) {
-                            var tokenValue = success.data.access_token;
 
-                            sessionStorage.headers = 'Bearer ' + tokenValue;
-                            // sessionStorage.userName = success.data.userName;
+                            preserveUserData(success.data);
 
-                            $cookies.put('authentication', tokenValue, {expires: new Date(success.data['.expires'])});
-                            $http.defaults.headers.common.Authorization = 'Bearer ' + tokenValue;
-
-                            getIdentity().then(function (userInfo) {
-                                currentUser.Id = userInfo.Id;
-                                currentUser.isAdmin = userInfo.isAdmin;
-                                currentUser.Username = userInfo.Username;
-                                defer.resolve(success.data);
-                            });
+                            identity.requestUserProfile()
+                                .then(function () {
+                                    defer.resolve(success.data);
+                                });
 
                         }, function (error) {
-                            defer.reject(error.data.error_description || error.data.message);
-                        });
-                    return defer.promise;
-                }
-
-                function getIdentity() {
-                    var defer = $q.defer();
-                    $http.get(BASE_URL + 'users/me', {headers: {'Authorization': sessionStorage.headers}})
-                        .then(function (identityResponse) {
-                            defer.resolve(identityResponse.data)
-                        }, function (error) {
-                            defer.reject(error)
+                            defer.reject(error.data.message || error.data.error_description)
                         });
                     return defer.promise;
                 }
 
                 function logout() {
-                    $cookies.remove();
+                    $cookies.remove(AUTHENTICATION_COOKIE_KEY);
                     $http.defaults.headers.common.Authorization = null;
                     identity.removeUser();
                     sessionStorage.clear();
@@ -65,7 +66,8 @@
                     register: register,
                     login: login,
                     logout: logout,
-                    getIdentity: getIdentity
+                    refreshCookie: refreshCookie,
+                    isAuthenticated: isAuthenticated
                 }
             }]);
 }());

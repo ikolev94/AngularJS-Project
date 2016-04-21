@@ -57,6 +57,8 @@
                             authentication.login(user)
                                 .then(function (userData) {
                                     notification.success('Welcome ' + userData.userName);
+                                    $scope.setUserMenu();
+                                    if (userData.isAdmin)$scope.setAdminMenu();
                                     $location.path('/dashboard');
                                 }, function (errorMsg) {
                                     notification.error(errorMsg);
@@ -75,9 +77,5 @@
                         }
                     };
 
-                    $scope.logout = function () {
-                        authentication.logout();
-                        $location.path('/');
-                    }
                 }]);
 }());

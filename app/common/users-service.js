@@ -10,7 +10,7 @@
 
                 function getAllUsers() {
                     var defer = $q.defer();
-                    $http.get(BASE_URL + 'users', {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(BASE_URL + 'users')
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -21,7 +21,7 @@
 
                 function changePassword(passwordData) {
                     var defer = $q.defer();
-                    $http.post(BASE_URL + 'api/Account/ChangePassword', passwordData, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.post(BASE_URL + 'api/Account/ChangePassword', passwordData)
                         .then(function (success) {
                             defer.resolve(success.data);
                         }, function (error) {

@@ -10,7 +10,7 @@
 
                 function getProjectIssues(projectId) {
                     var defer = $q.defer();
-                    $http.get(baseUrl + projectId + '/issues', {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(baseUrl + projectId + '/issues')
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -21,7 +21,7 @@
 
                 function getProjectById(id) {
                     var defer = $q.defer();
-                    $http.get(baseUrl + id, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(baseUrl + id)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -32,7 +32,7 @@
 
                 function getAllProjects() {
                     var defer = $q.defer();
-                    $http.get(baseUrl, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(baseUrl)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -43,8 +43,7 @@
 
                 function getUserProjects(pageNumber, name) {
                     var defer = $q.defer();
-                    $http.get(baseUrl + '?pageSize=10&pageNumber=' + pageNumber + '&filter=Lead.Username=="' + name + '"',
-                        {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(baseUrl + '?pageSize=10&pageNumber=' + pageNumber + '&filter=Lead.Username=="' + name + '"')
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -55,7 +54,7 @@
 
                 function addProject(project) {
                     var defer = $q.defer();
-                    $http.post(baseUrl, project, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.post(baseUrl, project)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -66,7 +65,7 @@
 
                 function updateProject(id, project) {
                     var defer = $q.defer();
-                    $http.put(baseUrl + id, project, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.put(baseUrl + id, project)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {

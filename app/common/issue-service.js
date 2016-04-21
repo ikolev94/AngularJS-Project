@@ -11,8 +11,7 @@
 
                 function getMyIssuesSortByDescDueDate(page) {
                     var defer = $q.defer();
-                    $http.get(serviceUrl + 'me?pageSize=10&pageNumber=' + page + '&orderBy=DueDate desc',
-                        {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(serviceUrl + 'me?pageSize=10&pageNumber=' + page + '&orderBy=DueDate desc')
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -23,7 +22,7 @@
 
                 function addIssue(issue) {
                     var defer = $q.defer();
-                    $http.post(serviceUrl, issue, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.post(serviceUrl, issue)
                         .then(function (respond) {
                             defer.resolve(respond.data)
                         }, function (error) {
@@ -34,7 +33,7 @@
 
                 function getIssueById(id) {
                     var defer = $q.defer();
-                    $http.get(serviceUrl + id, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(serviceUrl + id)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -45,7 +44,7 @@
 
                 function getIssueComments(issueId) {
                     var defer = $q.defer();
-                    $http.get(serviceUrl + issueId + '/comments', {headers: {'Authorization': sessionStorage.headers}})
+                    $http.get(serviceUrl + issueId + '/comments')
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -56,8 +55,7 @@
 
                 function addIssuesComment(issueId, comment) {
                     var defer = $q.defer();
-                    $http.post(serviceUrl + issueId + '/comments', comment,
-                        {headers: {'Authorization': sessionStorage.headers}})
+                    $http.post(serviceUrl + issueId + '/comments', comment)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -68,7 +66,7 @@
 
                 function updateIssue(issueId, issue) {
                     var defer = $q.defer();
-                    $http.put(serviceUrl + issueId, issue, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.put(serviceUrl + issueId, issue)
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {
@@ -80,7 +78,7 @@
                 function changeIssueStatus(issueId, newStatus) {
                     var defer = $q.defer();
                     var url = serviceUrl + issueId + '/changestatus?statusid=' + newStatus;
-                    $http.put(url, {}, {headers: {'Authorization': sessionStorage.headers}})
+                    $http.put(url, {})
                         .then(function (respond) {
                             defer.resolve(respond.data);
                         }, function (error) {

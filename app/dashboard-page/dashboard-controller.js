@@ -5,17 +5,20 @@
 
         .controller('DashboardCtrl', [
             '$scope',
-            'authentication',
+            'identity',
             'issueService',
-            'user',
             'projectService',
-            function ($scope, authentication, issueService, user, projectService) {
+            'user',
+            function ($scope, identity, issueService, projectService, user) {
                 var ISSUES_PER_PAGE = 10;
 
                 $scope.currentPage = 1;
                 $scope.currentProjectsPage = 1;
 
                 $scope.isAdmin = user.isAdmin;
+                $scope.user = user;
+                getMyProjects();
+                getMyIssues();
 
                 function getMyIssues(page) {
                     issueService.getMyIssuesSortByDescDueDate(page || 1)
@@ -26,7 +29,7 @@
                 }
 
                 function getMyProjects(page) {
-                    projectService.getUserProjects(page || 1, user.Username)
+                    projectService.getUserProjects(page || 1, $scope.user.Username)
                         .then(function (p) {
                             $scope.totalProjects = p.TotalPages * ISSUES_PER_PAGE;
                             $scope.projects = p.Projects;
@@ -40,10 +43,6 @@
                 $scope.projectsPageChanged = function (page) {
                     getMyProjects(page);
                 };
-
-                getMyProjects();
-                getMyIssues();
-
 
             }]);
 }());

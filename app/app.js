@@ -28,7 +28,11 @@
                 .when('/projects', {
                     templateUrl: 'all-projects-page/all-projects-page.html',
                     controller: 'ProjectsCtrl',
-                    resolve: routeResolveChecks.admin
+                    resolve: {
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user,
+                        admin: routeResolveChecks.admin
+                    }
                 })
                 .when('/', {
                     templateUrl: 'users/users.html',
@@ -37,44 +41,57 @@
                 .when('/dashboard', {
                     templateUrl: 'dashboard-page/dashboard.html',
                     controller: 'DashboardCtrl',
-                    resolve: routeResolveChecks.user
+                    resolve: {
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
+                    }
                 })
                 .when('/projects/:id', {
                     templateUrl: 'project-page/project-page.html',
                     controller: 'ProjectCtrl',
                     resolve: {
-                        user: userAccessCheck
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
                     }
                 })
                 .when('/issues/:id', {
                     templateUrl: 'issue-page/issue-page.html',
                     controller: 'IssueCtrl',
                     resolve: {
-                        user: userAccessCheck
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
                     }
                 })
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',
                     controller: 'ProfileCtrl',
-                    resolve: routeResolveChecks.user
+                    resolve: {
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
+                    }
                 })
                 .when('/profile/password', {
                     templateUrl: 'profile/edit-password.html',
                     controller: 'PasswordCtrl',
                     resolve: {
-                        user: userAccessCheck
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
                     }
                 })
                 .when('/projects/:id/edit', {
                     templateUrl: 'edit-project-page/edit-project-page.html',
                     controller: 'EditProjectCtrl',
-                    resolve: routeResolveChecks.user
+                    resolve: {
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
+                    }
                 })
                 .when('/issues/:id/edit', {
                     templateUrl: 'edit-issue-page/edit-issue-page.html',
                     controller: 'EditIssueCtrl',
                     resolve: {
-                        user: userAccessCheck
+                        authenticated: routeResolveChecks.authenticated,
+                        user: routeResolveChecks.user
                     }
                 })
                 .when('/logout', {
@@ -83,37 +100,14 @@
                 })
                 .otherwise({redirectTo: '/dashboard'});
         }])
-        .run(function ($rootScope, $location) {
-            $rootScope.$on('$routeChangeStart', function () {
-                if (!sessionStorage.headers) {
-                    $rootScope.$broadcast('guest-event');
+        .run(['$rootScope', '$location', 'authentication', function ($rootScope, $location, authentication) {
+            $rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
+                if (rejection == 'Unauthorized Access') {
                     $location.path('/');
                 }
             });
-        });
 
-    var userAccessCheck = ['currentUser', 'authentication', '$q', '$location', '$rootScope',
-        function (currentUser, authentication, $q, $location, $rootScope) {
-            if (Object.keys(currentUser).length === 0) {
-                var defer = $q.defer();
-                authentication.getIdentity()
-                    .then(function (userInfo) {
-                        currentUser.Id = userInfo.Id;
-                        currentUser.isAdmin = userInfo.isAdmin;
-                        currentUser.Username = userInfo.Username;
-                        defer.resolve(userInfo);
-                        $rootScope.$broadcast('myEvent', currentUser);
-                        console.log('get user');
-                    }, function (error) {
-                        defer.reject(error);
-                        $rootScope.$broadcast('guest-event');
-                        $location.path('/');
-                    });
-                return defer.promise;
-            } else {
-                console.log('have user');
-                $rootScope.$broadcast('myEvent', currentUser);
-                return currentUser;
-            }
-        }];
+            authentication.refreshCookie();
+        }]);
+
 }());

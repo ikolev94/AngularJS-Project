@@ -21,7 +21,7 @@
     <!--<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>-->
     <!--<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
 </head>
-<body ng-cloak>
+<body ng-cloak ng-controller="MainCtrl">
 <div style="margin-bottom: 90px"></div>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -33,12 +33,12 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div menu class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul ng-if="isAuthenticated"  class="nav navbar-nav">
                 <li class="for-user for-admin">
                     <a href="#/dashboard">Dashboard</a>
                 </li>
-                <li class="for-admin">
+                <li ng-if="isAdminAuthenticated">
                     <a href="#/projects">Projects </a>
                 </li>
                 <li class="dropdown for-user for-admin">
@@ -51,10 +51,10 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="for-gust">
+                <li class="for-gust" ng-hide="isAuthenticated">
                     <a href="#/">Login</a>
                 </li>
-                <li ng-controller="UserCtrl" ng-click="logout()" class="for-user for-admin">
+                <li ng-show="isAuthenticated" ng-click="logout()" class="for-user for-admin">
                     <a href="#/logout">Logout</a>
                 </li>
             </ul>
@@ -72,7 +72,7 @@
 <script src="common/label-service.js"></script>
 <script src="common/typeahead-directive.js"></script>
 <script src="common/issue-service.js"></script>
-<script src="common/menu-directive.js"></script>
+<script src="common/main-controller.js"></script>
 <script src="common/route-resolvers-provider.js"></script>
 <script src="users/user-access-directive.js"></script>
 <script src="users/user-access-controller.js"></script>

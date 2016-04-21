@@ -17,8 +17,7 @@
 
             return {
                 getLabels: function (input) {
-                    return $http.get(BASE_URL + 'labels/?filter=' + input,
-                        {headers: {'Authorization': sessionStorage.headers}})
+                    return $http.get(BASE_URL + 'labels/?filter=' + input)
                         .then(function (resp) {
                             return resp.data;
                         });
