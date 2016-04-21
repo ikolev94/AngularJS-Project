@@ -83,7 +83,8 @@
                     controller: 'EditProjectCtrl',
                     resolve: {
                         authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
+                        user: routeResolveChecks.user,
+                        projectData: routeResolveChecks.editProject
                     }
                 })
                 .when('/issues/:id/edit', {
@@ -91,7 +92,8 @@
                     controller: 'EditIssueCtrl',
                     resolve: {
                         authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
+                        user: routeResolveChecks.user,
+                        issueData: routeResolveChecks.editIssue
                     }
                 })
                 .when('/logout', {

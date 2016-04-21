@@ -58,7 +58,6 @@
                                 .then(function (userData) {
                                     notification.success('Welcome ' + userData.userName);
                                     $scope.setUserMenu();
-                                    if (userData.isAdmin)$scope.setAdminMenu();
                                     $location.path('/dashboard');
                                 }, function (errorMsg) {
                                     notification.error(errorMsg);
@@ -68,7 +67,7 @@
                     $scope.register = function (user) {
                         if (validateRegisterUser(user)) {
                             authentication.register(user)
-                                .then(function (success) {
+                                .then(function () {
                                     user.username = user.email;
                                     $scope.login(user)
                                 }, function (errorMsg) {

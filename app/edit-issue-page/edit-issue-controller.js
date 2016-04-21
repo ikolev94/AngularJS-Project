@@ -13,7 +13,8 @@
                 'notification',
                 '$routeParams',
                 '$location',
-                function ($scope, issueService, usersService, projectService, notification, $routeParams, $location) {
+                'issueData',
+                function ($scope, issueService, usersService, projectService, notification, $routeParams, $location, issueData) {
 
                     function setCurrentProject() {
                         $scope.currentProject = $scope.projects.filter(function (p) {
@@ -25,14 +26,11 @@
                         setCurrentProject();
                     };
 
-                    issueService.getIssueById($routeParams.id)
-                        .then(function (issueData) {
-                            issueData.DueDate = new Date(issueData.DueDate);
-                            $scope.newIssue = issueData;
-                            $scope.newIssue.ProjectId = issueData.Project.Id;
-                            $scope.newIssue.AssigneeId = issueData.Assignee.Id;
-                            $scope.newIssue.PriorityId = issueData.Priority.Id;
-                        });
+                    $scope.newIssue = issueData;
+                    $scope.newIssue.ProjectId = issueData.Project.Id;
+                    $scope.newIssue.AssigneeId = issueData.Assignee.Id;
+                    $scope.newIssue.PriorityId = issueData.Priority.Id;
+
                     usersService.getAllUsers()
                         .then(function (allUsers) {
                             $scope.users = allUsers;
@@ -45,11 +43,11 @@
 
                     $scope.updateIssue = function (newIssue) {
                         issueService.updateIssue($routeParams.id, newIssue)
-                            .then(function (success) {
+                            .then(function () {
                                 notification.success('Issue updated successfully');
                                 $location.path('/dashboard');
                             }, function (error) {
                             })
                     }
-                }]);    
+                }]);
 }());

@@ -11,7 +11,7 @@
             'user',
             function ($scope, identity, issueService, projectService, user) {
                 var ISSUES_PER_PAGE = 10;
-
+                if (user.isAdmin)$scope.setAdminMenu();
                 $scope.currentPage = 1;
                 $scope.currentProjectsPage = 1;
 
