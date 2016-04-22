@@ -83,7 +83,7 @@
             editIssue: {
                 authenticated: routeResolvers.authenticated,
                 user: routeResolvers.user,
-                projectData: routeResolvers.editIssue
+                issueData: routeResolvers.editIssue
             },
             allProjects: {
                 authenticated: routeResolvers.authenticated,
