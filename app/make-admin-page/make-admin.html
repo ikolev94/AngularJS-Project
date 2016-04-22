@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+    <div class="col-lg-12">
+        <div class="modal-header">
+            <h3 class="modal-title" id="lineModalLabel">Make Admin</h3>
+        </div>
+        <div class="modal-body">
+            <form name="makeAdminForm">
+                <div class="form-group">
+                    <label for="InputTitle">Search user</label>
+                    <input type="text" class="form-control" ng-model="candidateAdmin" id="InputTitle"
+                           placeholder="Enter username" autocomplete="off">
+                </div>
+                <label for="sel2">select user</label>
+                <select class="form-control" ng-options="u.Id as u.Username for u in allUsers | orderBy: 'Username'| filter:candidateAdmin"
+                       size="6" ng-model="user.UserId" required="required" id="sel2">
+                    <option disabled="disabled" value="">-- choose user --</option>
+                </select>
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                <div class="btn-group" role="group">
+                    <button type="button" id="saveImage" ng-click="makeAdmin(user)"
+                            class="btn btn-default btn-hover-green" data-dismiss="modal"
+                            role="button" ng-disabled="makeAdminForm.$invalid">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

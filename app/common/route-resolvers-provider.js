@@ -94,6 +94,10 @@
             userAuthentication: {
                 authenticated: routeResolvers.authenticated,
                 user: routeResolvers.user
+            },
+            adminAuthentication: {
+                authenticated: routeResolvers.authenticated,
+                admin: routeResolvers.admin
             }
         };
 

@@ -30,9 +30,21 @@
                     return defer.promise;
                 }
 
+                function makeAdmin(user) {
+                    var defer = $q.defer();
+                    $http.put(BASE_URL + 'users/makeadmin', user)
+                        .then(function (success) {
+                            defer.resolve(success.data);
+                        }, function (error) {
+                            defer.reject(error.data.error_description || error.data.Message);
+                        });
+                    return defer.promise;
+                }
+
                 return {
                     getAllUsers: getAllUsers,
-                    changePassword: changePassword
+                    changePassword: changePassword,
+                    makeAdmin: makeAdmin
                 };
-            }]);    
+            }]);
 }());

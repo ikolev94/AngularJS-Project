@@ -69,6 +69,11 @@
                     controller: 'EditIssueCtrl',
                     resolve: routeResolveChecks.editIssue
                 })
+                .when('/makeAdmin', {
+                    templateUrl: 'make-admin-page/make-admin.html',
+                    controller: 'MakeAdminCtrl',
+                    resolve: routeResolveChecks.adminAuthentication
+                })
                 .when('/logout', {
                     controller: 'UserCtrl',
                     redirectTo: '/'
