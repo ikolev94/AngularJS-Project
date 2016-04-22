@@ -3,7 +3,7 @@
 
     var routeResolversProvider = function routeResolversProvider() {
 
-        var routeResolveChecks = {
+        var routeResolvers = {
             authenticated: ['$q', 'authentication', function ($q, authentication) {
                 if (authentication.isAuthenticated()) {
                     return $q.when(true);
@@ -67,7 +67,34 @@
                         });
 
                     return defer.promise;
+                }],
+            allProjects: ['projectService',
+                function (projectService) {
+                    return projectService.getAllProjects();
                 }]
+        };
+
+        var routeResolveChecks = {
+            editProject: {
+                authenticated: routeResolvers.authenticated,
+                user: routeResolvers.user,
+                projectData: routeResolvers.editProject
+            },
+            editIssue: {
+                authenticated: routeResolvers.authenticated,
+                user: routeResolvers.user,
+                projectData: routeResolvers.editIssue
+            },
+            allProjects: {
+                authenticated: routeResolvers.authenticated,
+                user: routeResolvers.user,
+                admin: routeResolvers.admin,
+                projectsData: routeResolvers.allProjects
+            },
+            userAuthentication: {
+                authenticated: routeResolvers.authenticated,
+                user: routeResolvers.user
+            }
         };
 
         return {

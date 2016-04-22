@@ -10,7 +10,8 @@
                 'projectService',
                 'currentUser',
                 'user',
-                function ($scope, projectService, currentUser, user) {
+                'projectsData',
+                function ($scope, projectService, currentUser, user, projectsData) {
                     $scope.checkCurrentUsername = function (name) {
                         return user.Username === name;
                     };
@@ -22,12 +23,9 @@
                         $scope.projects = $scope.allProjects.slice(toSkip, toSkip + ISSUES_PER_PAGE)
                     };
 
-                    projectService.getAllProjects()
-                        .then(function (projectsData) {
-                            $scope.allProjects = projectsData;
-                            $scope.projects = $scope.allProjects.slice(0, 10);
-                            $scope.totalItems = $scope.allProjects.length;
-                        });
+                    $scope.allProjects = projectsData;
+                    $scope.projects = $scope.allProjects.slice(0, 10);
+                    $scope.totalItems = $scope.allProjects.length;
 
                 }]);
 }());

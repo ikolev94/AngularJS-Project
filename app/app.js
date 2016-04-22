@@ -28,11 +28,7 @@
                 .when('/projects', {
                     templateUrl: 'all-projects-page/all-projects-page.html',
                     controller: 'ProjectsCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user,
-                        admin: routeResolveChecks.admin
-                    }
+                    resolve: routeResolveChecks.allProjects
                 })
                 .when('/', {
                     templateUrl: 'users/users.html',
@@ -41,60 +37,37 @@
                 .when('/dashboard', {
                     templateUrl: 'dashboard-page/dashboard.html',
                     controller: 'DashboardCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
-                    }
+                    resolve: routeResolveChecks.userAuthentication
                 })
                 .when('/projects/:id', {
                     templateUrl: 'project-page/project-page.html',
                     controller: 'ProjectCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
-                    }
+                    resolve: routeResolveChecks.userAuthentication
                 })
                 .when('/issues/:id', {
                     templateUrl: 'issue-page/issue-page.html',
                     controller: 'IssueCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
-                    }
+                    resolve: routeResolveChecks.userAuthentication
                 })
                 .when('/profile', {
                     templateUrl: 'profile/edit-profile.html',
                     controller: 'ProfileCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
-                    }
+                    resolve: routeResolveChecks.userAuthentication
                 })
                 .when('/profile/password', {
                     templateUrl: 'profile/edit-password.html',
                     controller: 'PasswordCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user
-                    }
+                    resolve: routeResolveChecks.userAuthentication
                 })
                 .when('/projects/:id/edit', {
                     templateUrl: 'edit-project-page/edit-project-page.html',
                     controller: 'EditProjectCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user,
-                        projectData: routeResolveChecks.editProject
-                    }
+                    resolve: routeResolveChecks.editProject
                 })
                 .when('/issues/:id/edit', {
                     templateUrl: 'edit-issue-page/edit-issue-page.html',
                     controller: 'EditIssueCtrl',
-                    resolve: {
-                        authenticated: routeResolveChecks.authenticated,
-                        user: routeResolveChecks.user,
-                        issueData: routeResolveChecks.editIssue
-                    }
+                    resolve: routeResolveChecks.editIssue
                 })
                 .when('/logout', {
                     controller: 'UserCtrl',
