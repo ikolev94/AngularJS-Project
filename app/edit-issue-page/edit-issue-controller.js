@@ -45,7 +45,7 @@
                         issueService.updateIssue($routeParams.id, newIssue)
                             .then(function () {
                                 notification.success('Issue updated successfully');
-                                $location.path('/dashboard');
+                                $location.path('/issues/'+$routeParams.id);
                             }, function (error) {
                             })
                     }
